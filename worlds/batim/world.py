@@ -26,7 +26,7 @@ class BATIMWorld(World):
 
     # There is always one region that the generator starts from & assumes you can always go back to.
     # This defaults to "Menu", but you can change it by overriding origin_region_name.
-    origin_region_name = "CH1 Intro"
+    origin_region_name = "Archives Hub"
 
 
     def create_regions(self) -> None:
@@ -55,5 +55,5 @@ class BATIMWorld(World):
     def fill_slot_data(self) -> Mapping[str, Any]:
         # If you need access to the player's chosen options on the client side, there is a helper for that.
         return self.options.as_dict(
-            "dummy_option"
+            "starting_chapter"
         )

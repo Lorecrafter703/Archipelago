@@ -14,10 +14,14 @@ def create_and_connect_regions(world: BATIMWorld) -> None:
 
 
 def create_all_regions(world: BATIMWorld) -> None:
+    archives_hub = Region("Archives Hub", world.player, world.multiworld)
     ch1_intro = Region("CH1 Intro", world.player, world.multiworld)
     ch1_basement = Region("CH1 Basement", world.player, world.multiworld)
+    ch2_intro = Region("CH2 Intro", world.player, world.multiworld)
+    ch2_after_keys = Region("CH2 After Keys", world.player, world.multiworld)
+    ch2_after_valve = Region("CH2 After Valve", world.player, world.multiworld)
 
-    regions = [ch1_intro, ch1_basement]
+    regions = [archives_hub, ch1_intro, ch1_basement, ch2_intro, ch2_after_keys, ch2_after_valve]
 
     # FIXME Special Options
     # # Some regions may only exist if the player enables certain options.
@@ -31,10 +35,18 @@ def create_all_regions(world: BATIMWorld) -> None:
 
 
 def connect_regions(world: BATIMWorld) -> None:
+    archives_hub = world.get_region("Archives Hub")
     ch1_intro = world.get_region("CH1 Intro")
     ch1_basement = world.get_region("CH1 Basement")
+    ch2_intro = world.get_region("CH2 Intro")
+    ch2_after_keys = world.get_region("CH2 After Keys")
+    ch2_after_valve = world.get_region("CH2 After Valve")
 
-    ch1_intro.connect(ch1_basement, "CH1 Intro to Basement", lambda state: state.has("Item", world.player)) # FIXME Item -> Ritual Items
+    archives_hub.connect(ch1_intro, "Archives Hub to CH1 Intro")
+    ch1_intro.connect(ch1_basement, "CH1 Intro to Basement")
+    archives_hub.connect(ch2_intro, "Archives Hub to CH2 Intro")
+    ch2_intro.connect(ch2_after_keys, "CH2 Intro to After Keys")
+    ch2_after_keys.connect(ch2_after_valve, "CH2 After Keys to After Valve")
 
     # FIXME Special Options
     # # Some Entrances may only exist if the player enables certain options.

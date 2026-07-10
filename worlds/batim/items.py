@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from BaseClasses import Item, ItemClassification
+from .options import StartingChapter
 
 if TYPE_CHECKING:
     from .world import BATIMWorld
@@ -15,7 +16,10 @@ ITEM_NAME_TO_ID = {
     "CH1 Inkwell": 5,
     "CH1 Record": 6,
     "CH1 Wrench": 7,
-    "Unlock CH2": 8
+    "Unlock CH1": 8,
+    "CH2 Keys": 9,
+    "CH2 Valve": 10,
+    "Unlock CH2": 15,
 }
 
 DEFAULT_ITEM_CLASSIFICATIONS = {
@@ -25,8 +29,11 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "CH1 Record": ItemClassification.progression,
     "CH1 Inkwell": ItemClassification.progression,
     "CH1 Book": ItemClassification.progression,
-    "Bacon Soup": ItemClassification.filler,
+    "CH2 Keys": ItemClassification.progression,
+    "CH2 Valve": ItemClassification.progression,
+    "Unlock CH1": ItemClassification.progression,
     "Unlock CH2": ItemClassification.progression,
+    "Bacon Soup": ItemClassification.filler,
 }
 
 
@@ -69,8 +76,28 @@ def create_all_items(world: BATIMWorld) -> None:
         world.create_item("CH1 Record"),
         world.create_item("CH1 Inkwell"),
         world.create_item("CH1 Book"),
-        world.create_item("Unlock CH2"),
+        world.create_item("CH2 Keys"),
+        world.create_item("CH2 Valve"),
     ]
+
+    ch1 = world.create_item("Unlock CH1")
+    ch2 = world.create_item("Unlock CH2")
+    # ch3 = world.create_item("Unlock CH3")
+    # ch4 = world.create_item("Unlock CH4")
+    # ch5 = world.create_item("Unlock CH5")
+
+    match world.options.starting_chapter:
+        case StartingChapter.option_one:
+            world.push_precollected(ch1)
+            itempool.append(ch2)
+            #itempool.append(ch3)
+            #itempool.append(ch4)
+        case StartingChapter.option_two:
+            itempool.append(ch1)
+            world.push_precollected(ch2)
+            #itempool.append(ch3)
+            #itempool.append(ch4)
+
 
     # FIXME Special Options
     # # Some items may only exist if the player enables certain options.
@@ -100,3 +127,6 @@ def create_all_items(world: BATIMWorld) -> None:
     #     # We're adding a filler item, but you can also add progression items to the player's precollected inventory.
     #     starting_confetti_cannon = world.create_item("Confetti Cannon")
     #     world.push_precollected(starting_confetti_cannon)
+
+
+

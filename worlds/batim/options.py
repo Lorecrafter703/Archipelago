@@ -95,18 +95,25 @@ from Options import Choice, OptionGroup, PerGameCommonOptions, Range, Toggle
 #     # For example, we could make it so "player_sprite: kitty" resolves to "player_sprite: cat" like this:
 #     alias_kitty = option_cat
 
-class DummyOption(Toggle):
+class StartingChapter(Choice):
     """
-    A dummy option
+    The first chapter you will have unlocked.
     """
 
-    display_name = "Dummy Option"
+    display_name = "Starting Chapter"
+
+    option_one = 0
+    option_two = 1
+    option_three = 2
+    option_four = 3
+
+    default_option = option_one
 
 # We must now define a dataclass inheriting from PerGameCommonOptions that we put all our options in.
 # This is in the format "option_name_in_snake_case: OptionClassName".
 @dataclass
 class BATIMOptions(PerGameCommonOptions):
-    dummy_option: DummyOption
+    starting_chapter: StartingChapter
     # hard_mode: HardMode
     # hammer: Hammer
     # extra_starting_chest: ExtraStartingChest

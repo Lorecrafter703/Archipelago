@@ -26,9 +26,17 @@ def set_all_rules(world: BATIMWorld) -> None:
 
 
 def set_all_entrance_rules(world: BATIMWorld) -> None:
+    archives_hub_to_ch1_intro = world.get_entrance("Archives Hub to CH1 Intro")
     ch1_intro_to_basement = world.get_entrance("CH1 Intro to Basement")
+    archives_hub_to_ch2_intro = world.get_entrance("Archives Hub to CH2 Intro")
+    ch2_intro_to_after_keys = world.get_entrance("CH2 Intro to After Keys")
+    ch2_after_keys_to_after_valve = world.get_entrance("CH2 After Keys to After Valve")
 
+    world.set_rule(archives_hub_to_ch1_intro, Has("Unlock CH1"))
     world.set_rule(ch1_intro_to_basement, CAN_START_INK_MACHINE)
+    world.set_rule(archives_hub_to_ch2_intro, Has("Unlock CH2"))
+    world.set_rule(ch2_intro_to_after_keys, Has("CH2 Keys"))
+    world.set_rule(ch2_after_keys_to_after_valve, Has("CH2 Valve"))
 
     # FIXME Special Options
     # # Some entrance rules may only apply if the player enabled certain options.
