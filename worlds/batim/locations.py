@@ -38,6 +38,9 @@ LOCATION_NAME_TO_ID = {
     "CH1 Inkwell": 25,
     "CH1 Record": 26,
     "CH1 Wrench": 27,
+    "CH1 Audio Log Thomas 1": 28,
+    "CH1 Audio Log Wally 1": 29,
+    "CH1 Complete": 30,
 }
 
 
@@ -84,10 +87,11 @@ def create_regular_locations(world: BATIMWorld) -> None:
             "CH1 Bacon Soup 17",
             "CH1 Bacon Soup 18",
             "CH1 Bacon Soup 19",
+            "CH1 Audio Log Wally 1",
     ])
     ch1_intro.add_locations(ch1_intro_locations, BATIMLocation)
 
-    ch1_basement_locations = get_location_names_with_ids(["CH1 Bacon Soup 20", "CH1 Bacon Soup 0"])
+    ch1_basement_locations = get_location_names_with_ids(["CH1 Bacon Soup 20", "CH1 Bacon Soup 0", "CH1 Audio Log Thomas 1", "CH1 Complete"])
     ch1_basement.add_locations(ch1_basement_locations, BATIMLocation)
 
     # FIXME Special Options

@@ -15,7 +15,7 @@ ITEM_NAME_TO_ID = {
     "CH1 Inkwell": 5,
     "CH1 Record": 6,
     "CH1 Wrench": 7,
-
+    "Unlock CH2": 8
 }
 
 DEFAULT_ITEM_CLASSIFICATIONS = {
@@ -26,6 +26,7 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "CH1 Inkwell": ItemClassification.progression,
     "CH1 Book": ItemClassification.progression,
     "Bacon Soup": ItemClassification.filler,
+    "Unlock CH2": ItemClassification.progression,
 }
 
 
@@ -68,6 +69,7 @@ def create_all_items(world: BATIMWorld) -> None:
         world.create_item("CH1 Record"),
         world.create_item("CH1 Inkwell"),
         world.create_item("CH1 Book"),
+        world.create_item("Unlock CH2"),
     ]
 
     # FIXME Special Options
