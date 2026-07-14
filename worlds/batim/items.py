@@ -10,16 +10,22 @@ if TYPE_CHECKING:
 
 ITEM_NAME_TO_ID = {
     "Bacon Soup": 1,
-    "CH1 Book": 2,
-    "CH1 Doll": 3,
-    "CH1 Gear": 4,
-    "CH1 Inkwell": 5,
-    "CH1 Record": 6,
-    "CH1 Wrench": 7,
-    "Unlock CH1": 8,
-    "CH2 Keys": 9,
-    "CH2 Valve": 10,
-    "Unlock CH2": 15,
+    "Unlock CH1": 100,
+    "CH1 Book": 101,
+    "CH1 Doll": 102,
+    "CH1 Gear": 103,
+    "CH1 Inkwell": 104,
+    "CH1 Record": 105,
+    "CH1 Wrench": 106,
+    "Unlock CH2": 200,
+    "CH2 Keys": 201,
+    "CH2 Valve": 202,
+    "Unlock CH3": 300,
+    "CH3 Toys": 301,
+    "Unlock CH4": 400,
+    "CH4 Books": 401,
+    "CH4 Bossfight Bertrum": 402,
+    "Unlock CH5": 500,
 }
 
 DEFAULT_ITEM_CLASSIFICATIONS = {
@@ -31,8 +37,14 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "CH1 Book": ItemClassification.progression,
     "CH2 Keys": ItemClassification.progression,
     "CH2 Valve": ItemClassification.progression,
+    "CH3 Toys": ItemClassification.progression,
+    "CH4 Books": ItemClassification.progression,
+    "CH4 Bossfight Bertrum": ItemClassification.progression,
     "Unlock CH1": ItemClassification.progression,
     "Unlock CH2": ItemClassification.progression,
+    "Unlock CH3": ItemClassification.progression,
+    "Unlock CH4": ItemClassification.progression,
+    "Unlock CH5": ItemClassification.progression,
     "Bacon Soup": ItemClassification.filler,
 }
 
@@ -78,25 +90,38 @@ def create_all_items(world: BATIMWorld) -> None:
         world.create_item("CH1 Book"),
         world.create_item("CH2 Keys"),
         world.create_item("CH2 Valve"),
+        world.create_item("CH3 Toys"),
+        world.create_item("CH4 Books"),
+        world.create_item("CH4 Bossfight Bertrum"),
     ]
 
     ch1 = world.create_item("Unlock CH1")
     ch2 = world.create_item("Unlock CH2")
-    # ch3 = world.create_item("Unlock CH3")
-    # ch4 = world.create_item("Unlock CH4")
+    ch3 = world.create_item("Unlock CH3")
+    ch4 = world.create_item("Unlock CH4")
     # ch5 = world.create_item("Unlock CH5")
 
     match world.options.starting_chapter:
         case StartingChapter.option_one:
             world.push_precollected(ch1)
             itempool.append(ch2)
-            #itempool.append(ch3)
-            #itempool.append(ch4)
+            itempool.append(ch3)
+            itempool.append(ch4)
         case StartingChapter.option_two:
             itempool.append(ch1)
             world.push_precollected(ch2)
-            #itempool.append(ch3)
-            #itempool.append(ch4)
+            itempool.append(ch3)
+            itempool.append(ch4)
+        case StartingChapter.option_three:
+            itempool.append(ch1)
+            itempool.append(ch2)
+            world.push_precollected(ch3)
+            itempool.append(ch4)
+        case StartingChapter.option_four:
+            itempool.append(ch1)
+            itempool.append(ch2)
+            itempool.append(ch3)
+            world.push_precollected(ch4)
 
 
     # FIXME Special Options
