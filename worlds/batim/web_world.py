@@ -1,8 +1,8 @@
 from BaseClasses import Tutorial
 from worlds.AutoWorld import WebWorld
 
-# FIXME Add option_groups and option_presets
-#from .options import option_groups, option_presets
+# FIXME Add option_presets
+from .options import option_groups#, option_presets
 
 
 # For our game to display correctly on the website, we need to define a WebWorld subclass.
@@ -42,7 +42,7 @@ class BATIMWebWorld(WebWorld):
     # We add these tutorials to our WebWorld by overriding the "tutorials" field.
     tutorials = [setup_en, setup_de]
 
-    # FIXME ADD option groups/option presets
-    # # If we have option groups and/or option presets, we need to specify these here as well.
-    # option_groups = option_groups
-    # options_presets = option_presets
+    # FIXME ADD option presets
+    # If we have option groups and/or option presets, we need to specify these here as well.
+    option_groups = option_groups
+    #options_presets = option_presets

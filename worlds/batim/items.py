@@ -3,13 +3,15 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from BaseClasses import Item, ItemClassification
-from .options import StartingChapter
+from .options import StartingChapter, TotalBaconSoups, BaconSoupsRequired
 
 if TYPE_CHECKING:
     from .world import BATIMWorld
 
 ITEM_NAME_TO_ID = {
     "Bacon Soup": 1,
+    "Trap": 2,
+    "Filler": 3,
     "Unlock CH1": 100,
     "CH1 Book": 101,
     "CH1 Doll": 102,
@@ -25,7 +27,7 @@ ITEM_NAME_TO_ID = {
     "Unlock CH4": 400,
     "CH4 Books": 401,
     "CH4 Bossfight Bertrum": 402,
-    "Unlock CH5": 500,
+    #"Unlock CH5": 500,
 }
 
 DEFAULT_ITEM_CLASSIFICATIONS = {
@@ -44,17 +46,18 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "Unlock CH2": ItemClassification.progression,
     "Unlock CH3": ItemClassification.progression,
     "Unlock CH4": ItemClassification.progression,
-    "Unlock CH5": ItemClassification.progression,
-    "Bacon Soup": ItemClassification.filler,
+    #"Unlock CH5": ItemClassification.progression,
+    "Bacon Soup": ItemClassification.progression,
+    "Filler": ItemClassification.filler,
+    "Trap": ItemClassification.trap,
 }
-
 
 class BATIMItem(Item):
     game = "Bendy and the Ink Machine"
 
 
 def get_random_filler_item_name(world: BATIMWorld) -> str:
-    return "Bacon Soup"
+    return "Filler"
     # FIXME Multiple Filler Items if needed
     # # APQuest has an option called "trap_chance".
     # # This is the percentage chance that each filler item is a Math Trap instead of a Confetti Cannon.
@@ -81,6 +84,7 @@ def create_item_with_correct_classification(world: BATIMWorld, name: str) -> BAT
 
 
 def create_all_items(world: BATIMWorld) -> None:
+    # Standard Items
     itempool: list[Item] = [
         world.create_item("CH1 Doll"),
         world.create_item("CH1 Gear"),
@@ -95,6 +99,7 @@ def create_all_items(world: BATIMWorld) -> None:
         world.create_item("CH4 Bossfight Bertrum"),
     ]
 
+    # Chapter Unlocks
     ch1 = world.create_item("Unlock CH1")
     ch2 = world.create_item("Unlock CH2")
     ch3 = world.create_item("Unlock CH3")
@@ -123,6 +128,9 @@ def create_all_items(world: BATIMWorld) -> None:
             itempool.append(ch3)
             world.push_precollected(ch4)
 
+    # Bacon Soups
+    bacon_soups_required = int(world.options.total_bacon_soups * (world.options.bacon_soups_required / 100))
+    itempool += [world.create_item("Bacon Soup") for _ in range(bacon_soups_required)]
 
     # FIXME Special Options
     # # Some items may only exist if the player enables certain options.

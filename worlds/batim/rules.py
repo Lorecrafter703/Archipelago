@@ -5,14 +5,12 @@ from typing import TYPE_CHECKING
 from rule_builder.options import OptionFilter
 from rule_builder.rules import Has, HasAll, Rule
 
-# FIXME import options
-#from .options import HardMode
+from .options import BATIMOptions
 
 if TYPE_CHECKING:
     from .world import BATIMWorld
 
 CAN_START_INK_MACHINE = HasAll("CH1 Doll", "CH1 Gear", "CH1 Wrench", "CH1 Inkwell", "CH1 Record", "CH1 Book")
-
 
 def set_all_rules(world: BATIMWorld) -> None:
     # In order for AP to generate an item layout that is actually possible for the player to complete,
@@ -36,6 +34,7 @@ def set_all_entrance_rules(world: BATIMWorld) -> None:
     archives_hub_to_ch4_intro = world.get_entrance("Archives Hub to CH4 Intro")
     ch4_intro_to_after_book_puzzle = world.get_entrance("CH4 Intro to After Book Puzzle")
     ch4_after_book_puzzle_to_after_bertrum = world.get_entrance("CH4 After Book Puzzle to After Bertrum")
+    archives_hub_to_ch5_intro = world.get_entrance("Archives Hub to CH5")
 
     world.set_rule(archives_hub_to_ch1_intro, Has("Unlock CH1"))
     world.set_rule(ch1_intro_to_basement, CAN_START_INK_MACHINE)
@@ -47,6 +46,8 @@ def set_all_entrance_rules(world: BATIMWorld) -> None:
     world.set_rule(archives_hub_to_ch4_intro, Has("Unlock CH4"))
     world.set_rule(ch4_intro_to_after_book_puzzle, Has("CH4 Books"))
     world.set_rule(ch4_after_book_puzzle_to_after_bertrum, Has("CH4 Bossfight Bertrum"))
+    ch5_unlock_condition = Has("Bacon Soup", int(world.options.total_bacon_soups * (world.options.bacon_soups_required / 100)))
+    world.set_rule(archives_hub_to_ch5_intro, ch5_unlock_condition)
 
     # FIXME Special Options
     # # Some entrance rules may only apply if the player enabled certain options.
@@ -61,15 +62,6 @@ def set_all_entrance_rules(world: BATIMWorld) -> None:
 def set_all_location_rules(world: BATIMWorld) -> None:
     pass
     # FIXME Location Rules if needed
-    # # Location rules work no differently from Entrance rules.
-    # # Most of our locations are chests that can simply be opened by walking up to them.
-    # # Thus, their logical requirements are covered by the Entrance rules of the Entrances that were required to
-    # # reach the region that the chest sits in.
-    # # However, our two enemies work differently.
-    # # Entering the room with the enemy is not enough, you also need to have enough combat items to be able to defeat it.
-    # # So, we need to set requirements on the Locations themselves.
-    # # Since combat is a bit more complicated, we'll use this chance to cover some advanced access rule concepts.
-    #
     # # In "set_all_entrance_rules", we had a rule for a location that doesn't always exist.
     # # In this case, we had to check for its existence (by checking the player's chosen options) before setting the rule.
     # # Other times, you may have a situation where a location can have two different rules depending on the options.
@@ -120,7 +112,7 @@ def set_all_location_rules(world: BATIMWorld) -> None:
 
 
 def set_completion_condition(world: BATIMWorld) -> None:
-    world.set_completion_rule(CAN_START_INK_MACHINE)
+    world.set_completion_rule(Has("Victory"))
 
 
 # One final comment about rules:

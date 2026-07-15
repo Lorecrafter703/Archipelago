@@ -22,44 +22,6 @@ from Options import Choice, OptionGroup, PerGameCommonOptions, Range, Toggle
 #     display_name = "Hard Mode"
 #
 #
-# class Hammer(Toggle):
-#     """
-#     Adds another item to the itempool: The Hammer.
-#     The top middle chest will now be locked behind a breakable wall, requiring the Hammer.
-#     """
-#
-#     display_name = "Hammer"
-#
-#
-# class ExtraStartingChest(Toggle):
-#     """
-#     Adds an extra chest in the bottom left, making room for an extra Confetti Cannon.
-#     """
-#
-#     display_name = "Extra Starting Chest"
-#
-#
-# class TrapChance(Range):
-#     """
-#     Percentage chance that any given Confetti Cannon will be replaced by a Math Trap.
-#     """
-#
-#     display_name = "Trap Chance"
-#
-#     range_start = 0
-#     range_end = 100
-#     default = 0
-#
-#
-# class StartWithOneConfettiCannon(Toggle):
-#     """
-#     Start with a confetti cannon already in your inventory.
-#     Why? Because you deserve it. You get to celebrate yourself without doing any work first.
-#     """
-#
-#     display_name = "Start With One Confetti Cannon"
-#
-#
 # # A Range is a numeric option with a min and max value. This will be represented by a slider on the website.
 # class ConfettiExplosiveness(Range):
 #     """
@@ -99,41 +61,70 @@ class StartingChapter(Choice):
     """
     The first chapter you will have unlocked.
     """
-
     display_name = "Starting Chapter"
-
     option_one = 0
     option_two = 1
     option_three = 2
     option_four = 3
-
     default_option = option_one
+
+
+class TotalBaconSoups(Range):
+    """
+    The total number of Bacon Soups included in the world
+    """
+    display_name = "Total Bacon Soups"
+    range_start = 0
+    range_end = 117
+    default_option = 40
+
+
+class BaconSoupsRequired(Range):
+    """
+    What percentage of the total Bacon Soups will be required to begin Chapter 5
+    """
+    display_name = "Bacon Soups Required"
+    range_start = 0
+    range_end = 100
+    default_option = 75
+
+
+class MinigameSanity(Toggle):
+    """
+    Getting perfect scores on the three minigames in the Storage 9 warehouse sends checks
+    """
+    display_name = "Minigame Sanity"
+
+
+class TheMeatlySanity(Toggle):
+    """
+    Finding hidden theMeatly cutouts sends checks
+    """
+    display_name = "theMeatly Sanity"
+
 
 # We must now define a dataclass inheriting from PerGameCommonOptions that we put all our options in.
 # This is in the format "option_name_in_snake_case: OptionClassName".
 @dataclass
 class BATIMOptions(PerGameCommonOptions):
     starting_chapter: StartingChapter
-    # hard_mode: HardMode
-    # hammer: Hammer
-    # extra_starting_chest: ExtraStartingChest
-    # start_with_one_confetti_cannon: StartWithOneConfettiCannon
-    # trap_chance: TrapChance
-    # confetti_explosiveness: ConfettiExplosiveness
-    # player_sprite: PlayerSprite
+    total_bacon_soups: TotalBaconSoups
+    bacon_soups_required: BaconSoupsRequired
+    minigame_sanity: MinigameSanity
+    the_meatly_sanity: TheMeatlySanity
 
-# FIXME Option Groups
-# # If we want to group our options by similar type, we can do so as well. This looks nice on the website.
-# option_groups = [
-#     OptionGroup(
-#         "Gameplay Options",
-#         [HardMode, Hammer, ExtraStartingChest, StartWithOneConfettiCannon, TrapChance],
-#     ),
-#     OptionGroup(
-#         "Aesthetic Options",
-#         [ConfettiExplosiveness, PlayerSprite],
-#     ),
-# ]
+
+# If we want to group our options by similar type, we can do so as well. This looks nice on the website.
+option_groups = [
+    OptionGroup(
+        "Basic Configurations",
+        [StartingChapter, TotalBaconSoups, BaconSoupsRequired],
+    ),
+    OptionGroup(
+        "Sanity Options",
+        [MinigameSanity, TheMeatlySanity],
+    ),
+]
 
 # FIXME Presets
 # # Finally, we can define some option presets if we want the player to be able to quickly choose a specific "mode".

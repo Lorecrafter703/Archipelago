@@ -29,8 +29,10 @@ def create_all_regions(world: BATIMWorld) -> None:
     ch4_intro = Region("CH4 Intro", world.player, world.multiworld)
     ch4_after_book_puzzle = Region("CH4 After Book Puzzle", world.player, world.multiworld)
     ch4_after_bertrum = Region("CH4 After Bertrum", world.player, world.multiworld)
+    # CH5 Locations
+    ch5 = Region("CH5", world.player, world.multiworld)
 
-    regions = [archives_hub, ch1_intro, ch1_basement, ch2_intro, ch2_after_keys, ch2_after_valve, ch3_intro, ch3_alice_objectives, ch4_intro, ch4_after_book_puzzle, ch4_after_bertrum]
+    regions = [archives_hub, ch1_intro, ch1_basement, ch2_intro, ch2_after_keys, ch2_after_valve, ch3_intro, ch3_alice_objectives, ch4_intro, ch4_after_book_puzzle, ch4_after_bertrum, ch5]
 
     # FIXME Special Options
     # # Some regions may only exist if the player enables certain options.
@@ -55,6 +57,7 @@ def connect_regions(world: BATIMWorld) -> None:
     ch4_intro = world.get_region("CH4 Intro")
     ch4_after_book_puzzle = world.get_region("CH4 After Book Puzzle")
     ch4_after_bertrum = world.get_region("CH4 After Bertrum")
+    ch5 = world.get_region("CH5")
 
     # Chapter 1
     archives_hub.connect(ch1_intro, "Archives Hub to CH1 Intro")
@@ -70,7 +73,8 @@ def connect_regions(world: BATIMWorld) -> None:
     archives_hub.connect(ch4_intro, "Archives Hub to CH4 Intro")
     ch4_intro.connect(ch4_after_book_puzzle, "CH4 Intro to After Book Puzzle")
     ch4_after_book_puzzle.connect(ch4_after_bertrum, "CH4 After Book Puzzle to After Bertrum")
-
+    # Chapter 5
+    archives_hub.connect(ch5, "Archives Hub to CH5")
 
 
     # FIXME Special Options

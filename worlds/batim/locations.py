@@ -40,6 +40,8 @@ LOCATION_NAME_TO_ID = {
     "CH1 Wrench": 126,
     "CH1 Audio Log Dark and Cold": 127,
     "CH1 Audio Log This Machine": 128,
+    "CH1 Radio": 129,
+    "CH1 theMeatly": 130,
     "CH1 Complete": 199,
     "CH2 Bacon Soup 0": 200,
     "CH2 Bacon Soup 1": 201,
@@ -81,6 +83,8 @@ LOCATION_NAME_TO_ID = {
     "CH2 Audio Log Stupid Keys": 237,
     "CH2 Audio Log Sanctuary Puzzle": 238,
     "CH2 Audio Log Quiet and Smelly Sewers": 239,
+    "CH2 Radio": 240,
+    "CH2 theMeatly": 241,
     "CH2 Complete": 299,
     "CH3 Bacon Soup 0": 300,
     "CH3 Bacon Soup 1": 301,
@@ -131,6 +135,8 @@ LOCATION_NAME_TO_ID = {
     "CH3 Audio Log The Genius Upstairs": 357,
     "CH3 Audio Log Looking for Trouble": 358,
     "CH3 Audio Log Man of Ideas": 359,
+    "CH3 Radio": 360,
+    "CH3 theMeatly": 361,
     "CH3 Complete": 399,
     "CH4 Bacon Soup 0": 400,
     "CH4 Bacon Soup 1": 401,
@@ -163,8 +169,25 @@ LOCATION_NAME_TO_ID = {
     "CH4 Audio Log Mechanical Demon": 434,
     "CH4 Audio Log Bertrum's Reveal": 435,
     "CH4 Audio Log Turn it Off": 436,
+    "CH4 Radio": 437,
+    "CH4 theMeatly": 438,
     "CH4 Complete": 499,
-    "CH5 Complete": 599,
+    "CH5 Bacon Soup 0": 500,
+    "CH5 Bacon Soup 1": 501,
+    "CH5 Bacon Soup 2": 502,
+    "CH5 Bacon Soup 3": 503,
+    "CH5 Bacon Soup 4": 504,
+    "CH5 Bacon Soup 5": 505,
+    "CH5 Bacon Soup 6": 506,
+    "CH5 Sammy Lawrence Boss": 507,
+    "CH5 Audio Log Office Report": 520,
+    "CH5 Audio Log Chocolate Cake": 521,
+    "CH5 Audio Log The Big Picture": 522,
+    "CH5 Audio Log Thousands of Souls": 523,
+    "CH5 Audio Log Bringing Alice to Life": 524,
+    "CH5 Audio Log Bendy's End": 525,
+    "CH5 Radio": 526,
+    "CH5 theMeatly": 527,
 }
 
 
@@ -192,6 +215,7 @@ def create_regular_locations(world: BATIMWorld) -> None:
     ch4_intro = world.get_region("CH4 Intro")
     ch4_after_book_puzzle = world.get_region("CH4 After Book Puzzle")
     ch4_after_bertrum = world.get_region("CH4 After Bertrum")
+    ch5 = world.get_region("CH5")
 
     ch1_intro_locations = get_location_names_with_ids([
         "CH1 Doll",
@@ -219,7 +243,8 @@ def create_regular_locations(world: BATIMWorld) -> None:
         "CH1 Bacon Soup 17",
         "CH1 Bacon Soup 18",
         "CH1 Bacon Soup 19",
-        "CH1 Audio Log This Machine"
+        "CH1 Audio Log This Machine",
+        "CH1 Radio"
     ])
     ch1_intro.add_locations(ch1_intro_locations, BATIMLocation)
 
@@ -275,6 +300,7 @@ def create_regular_locations(world: BATIMWorld) -> None:
     ch2_after_valve_locations = get_location_names_with_ids([
         "CH2 Bacon Soup 21",
         "CH2 Bacon Soup 22",
+        "CH2 Radio",
         "CH2 Complete",
     ])
     ch2_after_valve.add_locations(ch2_after_valve_locations, BATIMLocation)
@@ -332,6 +358,8 @@ def create_regular_locations(world: BATIMWorld) -> None:
         "CH3 Audio Log The Genius Upstairs",
         "CH3 Audio Log Looking for Trouble",
         "CH3 Audio Log Man of Ideas",
+        "CH3 Radio",
+        "CH3 Complete"
     ])
     ch3_alice_objectives.add_locations(ch3_alice_objectives_locations, BATIMLocation)
 
@@ -360,9 +388,7 @@ def create_regular_locations(world: BATIMWorld) -> None:
         "CH4 Audio Log Colossal Wonders",
         "CH4 Audio Log Playing Games",
         "CH4 Audio Log Mechanical Demon",
-        "CH4 Bulls Eye",
-        "CH4 Call the Milk Man",
-        "CH4 Wasting Time",
+        "CH4 Radio",
     ])
     ch4_after_book_puzzle.add_locations(ch4_after_book_puzzle_locations, BATIMLocation)
 
@@ -375,8 +401,41 @@ def create_regular_locations(world: BATIMWorld) -> None:
         "CH4 Brute Boris Boss",
         "CH4 Audio Log Bertrum's Reveal",
         "CH4 Audio Log Turn it Off",
+        "CH4 Complete",
     ])
     ch4_after_bertrum.add_locations(ch4_after_bertrum_locations, BATIMLocation)
+
+    ch5_locations = get_location_names_with_ids([
+        "CH5 Bacon Soup 0",
+        "CH5 Bacon Soup 1",
+        "CH5 Bacon Soup 2",
+        "CH5 Bacon Soup 3",
+        "CH5 Bacon Soup 4",
+        "CH5 Bacon Soup 5",
+        "CH5 Bacon Soup 6",
+        "CH5 Sammy Lawrence Boss",
+        "CH5 Audio Log Office Report",
+        "CH5 Audio Log The Big Picture",
+        "CH5 Audio Log Chocolate Cake",
+        "CH5 Audio Log Thousands of Souls",
+        "CH5 Audio Log Bringing Alice to Life",
+        "CH5 Audio Log Bendy's End",
+        "CH5 Radio",
+    ])
+    ch5.add_locations(ch5_locations, BATIMLocation)
+
+    # Minigame Sanity
+    if world.options.minigame_sanity:
+        ch4_minigame_locations = get_location_names_with_ids(["CH4 Bulls Eye", "CH4 Call the Milk Man", "CH4 Wasting Time",])
+        ch4_after_book_puzzle.add_locations(ch4_minigame_locations, BATIMLocation)
+
+    # theMeatly Sanity
+    if world.options.the_meatly_sanity:
+        ch1_basement.add_locations(get_location_names_with_ids(["CH1 theMeatly"]), BATIMLocation)
+        ch2_after_valve.add_locations(get_location_names_with_ids(["CH2 theMeatly"]), BATIMLocation)
+        ch3_alice_objectives.add_locations(get_location_names_with_ids(["CH3 theMeatly"]), BATIMLocation)
+        ch4_intro.add_locations(get_location_names_with_ids(["CH4 theMeatly"]), BATIMLocation)
+        ch5.add_locations(get_location_names_with_ids(["CH5 theMeatly"]), BATIMLocation)
 
     # FIXME Special Options
     # # Locations may be in different regions depending on the player's options.
@@ -399,36 +458,5 @@ def create_regular_locations(world: BATIMWorld) -> None:
 
 
 def create_events(world: BATIMWorld) -> None:
-    pass # FIXME Events if needed
-    # # Sometimes, the player may perform in-game actions that allow them to progress which are not related to Items.
-    # # In our case, the player must press a button in the top left room to open the final boss door.
-    # # AP has something for this purpose: "Event locations" and "Event items".
-    # # An event location is no different than a regular location, except it has the address "None".
-    # # It is treated during generation like any other location, but then it is discarded.
-    # # This location cannot be "sent" and its item cannot be "received", but the item can be used in logic rules.
-    # # Since we are creating more locations and adding them to regions, we need to grab those regions again first.
-    # top_left_room = world.get_region("Top Left Room")
-    # final_boss_room = world.get_region("Final Boss Room")
-    #
-    # # One way to create an event is simply to use one of the normal methods of creating a location.
-    # button_in_top_left_room = APQuestLocation(world.player, "Top Left Room Button", None, top_left_room)
-    # top_left_room.locations.append(button_in_top_left_room)
-    #
-    # # We then need to put an event item onto the location.
-    # # An event item is an item whose code is "None" (same as the event location's address),
-    # # and whose classification is "progression". Item creation will be discussed more in items.py.
-    # # Note: Usually, items are created in world.create_items(), which for us happens in items.py.
-    # # However, when the location of an item is known ahead of time (as is the case with an event location/item pair),
-    # # it is common practice to create the item when creating the location.
-    # # Since locations also have to be finalized after world.create_regions(), which runs before world.create_items(),
-    # # we'll create both the event location and the event item in our locations.py code.
-    # button_item = items.APQuestItem("Top Left Room Button Pressed", ItemClassification.progression, None, world.player)
-    # button_in_top_left_room.place_locked_item(button_item)
-    #
-    # # A way simpler way to do create an event location/item pair is by using the region.create_event helper.
-    # # Luckily, we have another event we want to create: The Victory event.
-    # # We will use this event to track whether the player can win the game.
-    # # The Victory event is a completely optional abstraction - This will be discussed more in set_rules().
-    # final_boss_room.add_event(
-    #     "Final Boss Defeated", "Victory", location_type=APQuestLocation, item_type=items.APQuestItem
-    # )
+    ch5 = world.get_region("CH5")
+    ch5.add_event("Beast Bendy Defeated", "Victory", location_type=BATIMLocation, item_type=items.BATIMItem)

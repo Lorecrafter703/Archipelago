@@ -55,5 +55,9 @@ class BATIMWorld(World):
     def fill_slot_data(self) -> Mapping[str, Any]:
         # If you need access to the player's chosen options on the client side, there is a helper for that.
         return self.options.as_dict(
-            "starting_chapter"
+            "starting_chapter",
+            "total_bacon_soups",
+            "bacon_soups_required",
+            "minigame_sanity",
+            "the_meatly_sanity",
         )
