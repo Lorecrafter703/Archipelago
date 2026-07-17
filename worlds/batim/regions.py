@@ -14,7 +14,7 @@ def create_and_connect_regions(world: BATIMWorld) -> None:
 
 
 def create_all_regions(world: BATIMWorld) -> None:
-    archives_hub = Region("Archives Hub", world.player, world.multiworld)
+    menu = Region("Menu", world.player, world.multiworld)
     # CH1 Locations
     ch1_intro = Region("CH1 Intro", world.player, world.multiworld)
     ch1_basement = Region("CH1 Basement", world.player, world.multiworld)
@@ -32,7 +32,7 @@ def create_all_regions(world: BATIMWorld) -> None:
     # CH5 Locations
     ch5 = Region("CH5", world.player, world.multiworld)
 
-    regions = [archives_hub, ch1_intro, ch1_basement, ch2_intro, ch2_after_keys, ch2_after_valve, ch3_intro, ch3_alice_objectives, ch4_intro, ch4_after_book_puzzle, ch4_after_bertrum, ch5]
+    regions = [menu, ch1_intro, ch1_basement, ch2_intro, ch2_after_keys, ch2_after_valve, ch3_intro, ch3_alice_objectives, ch4_intro, ch4_after_book_puzzle, ch4_after_bertrum, ch5]
 
     # FIXME Special Options
     # # Some regions may only exist if the player enables certain options.
@@ -46,7 +46,7 @@ def create_all_regions(world: BATIMWorld) -> None:
 
 
 def connect_regions(world: BATIMWorld) -> None:
-    archives_hub = world.get_region("Archives Hub")
+    menu = world.get_region("Menu")
     ch1_intro = world.get_region("CH1 Intro")
     ch1_basement = world.get_region("CH1 Basement")
     ch2_intro = world.get_region("CH2 Intro")
@@ -60,21 +60,21 @@ def connect_regions(world: BATIMWorld) -> None:
     ch5 = world.get_region("CH5")
 
     # Chapter 1
-    archives_hub.connect(ch1_intro, "Archives Hub to CH1 Intro")
+    menu.connect(ch1_intro, "Menu to CH1 Intro")
     ch1_intro.connect(ch1_basement, "CH1 Intro to Basement")
     # Chapter 2
-    archives_hub.connect(ch2_intro, "Archives Hub to CH2 Intro")
+    menu.connect(ch2_intro, "Menu to CH2 Intro")
     ch2_intro.connect(ch2_after_keys, "CH2 Intro to After Keys")
     ch2_after_keys.connect(ch2_after_valve, "CH2 After Keys to After Valve")
     # Chapter 3
-    archives_hub.connect(ch3_intro, "Archives Hub to CH3 Intro")
+    menu.connect(ch3_intro, "Menu to CH3 Intro")
     ch3_intro.connect(ch3_alice_objectives, "CH3 Intro to Alice Objectives")
     # Chapter 4
-    archives_hub.connect(ch4_intro, "Archives Hub to CH4 Intro")
+    menu.connect(ch4_intro, "Menu to CH4 Intro")
     ch4_intro.connect(ch4_after_book_puzzle, "CH4 Intro to After Book Puzzle")
     ch4_after_book_puzzle.connect(ch4_after_bertrum, "CH4 After Book Puzzle to After Bertrum")
     # Chapter 5
-    archives_hub.connect(ch5, "Archives Hub to CH5")
+    menu.connect(ch5, "Menu to CH5")
 
 
     # FIXME Special Options

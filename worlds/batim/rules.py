@@ -24,30 +24,30 @@ def set_all_rules(world: BATIMWorld) -> None:
 
 
 def set_all_entrance_rules(world: BATIMWorld) -> None:
-    archives_hub_to_ch1_intro = world.get_entrance("Archives Hub to CH1 Intro")
+    menu_to_ch1_intro = world.get_entrance("Menu to CH1 Intro")
     ch1_intro_to_basement = world.get_entrance("CH1 Intro to Basement")
-    archives_hub_to_ch2_intro = world.get_entrance("Archives Hub to CH2 Intro")
+    menu_to_ch2_intro = world.get_entrance("Menu to CH2 Intro")
     ch2_intro_to_after_keys = world.get_entrance("CH2 Intro to After Keys")
     ch2_after_keys_to_after_valve = world.get_entrance("CH2 After Keys to After Valve")
-    archives_hub_to_ch3_intro = world.get_entrance("Archives Hub to CH3 Intro")
+    menu_to_ch3_intro = world.get_entrance("Menu to CH3 Intro")
     ch3_intro_to_alice_objectives = world.get_entrance("CH3 Intro to Alice Objectives")
-    archives_hub_to_ch4_intro = world.get_entrance("Archives Hub to CH4 Intro")
+    menu_to_ch4_intro = world.get_entrance("Menu to CH4 Intro")
     ch4_intro_to_after_book_puzzle = world.get_entrance("CH4 Intro to After Book Puzzle")
     ch4_after_book_puzzle_to_after_bertrum = world.get_entrance("CH4 After Book Puzzle to After Bertrum")
-    archives_hub_to_ch5_intro = world.get_entrance("Archives Hub to CH5")
+    menu_to_ch5_intro = world.get_entrance("Menu to CH5")
 
-    world.set_rule(archives_hub_to_ch1_intro, Has("Unlock CH1"))
+    world.set_rule(menu_to_ch1_intro, Has("Unlock CH1"))
     world.set_rule(ch1_intro_to_basement, CAN_START_INK_MACHINE)
-    world.set_rule(archives_hub_to_ch2_intro, Has("Unlock CH2"))
+    world.set_rule(menu_to_ch2_intro, Has("Unlock CH2"))
     world.set_rule(ch2_intro_to_after_keys, Has("CH2 Keys"))
     world.set_rule(ch2_after_keys_to_after_valve, Has("CH2 Valve"))
-    world.set_rule(archives_hub_to_ch3_intro, Has("Unlock CH3"))
+    world.set_rule(menu_to_ch3_intro, Has("Unlock CH3"))
     world.set_rule(ch3_intro_to_alice_objectives, Has("CH3 Toys"))
-    world.set_rule(archives_hub_to_ch4_intro, Has("Unlock CH4"))
+    world.set_rule(menu_to_ch4_intro, Has("Unlock CH4"))
     world.set_rule(ch4_intro_to_after_book_puzzle, Has("CH4 Books"))
     world.set_rule(ch4_after_book_puzzle_to_after_bertrum, Has("CH4 Bossfight Bertrum"))
     ch5_unlock_condition = Has("Bacon Soup", int(world.options.total_bacon_soups * (world.options.bacon_soups_required / 100)))
-    world.set_rule(archives_hub_to_ch5_intro, ch5_unlock_condition)
+    world.set_rule(menu_to_ch5_intro, ch5_unlock_condition)
 
     # FIXME Special Options
     # # Some entrance rules may only apply if the player enabled certain options.
