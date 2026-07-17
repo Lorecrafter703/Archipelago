@@ -18,7 +18,7 @@ class BATIMWorld(World):
     """
 
     game = "Bendy and the Ink Machine"
-    web = web_world.BATIMWebWorld() #FIXME
+    web = web_world.BATIMWebWorld()
     options_dataclass = batim_options.BATIMOptions
     options: batim_options.BATIMOptions  # Common mistake: This has to be a colon (:), not an equals sign (=).
     location_name_to_id = locations.LOCATION_NAME_TO_ID

@@ -66,7 +66,7 @@ class StartingChapter(Choice):
     option_two = 1
     option_three = 2
     option_four = 3
-    default_option = option_one
+    default = option_one
 
 
 class TotalBaconSoups(Range):
@@ -76,7 +76,7 @@ class TotalBaconSoups(Range):
     display_name = "Total Bacon Soups"
     range_start = 0
     range_end = 117
-    default_option = 40
+    default = 40
 
 
 class BaconSoupsRequired(Range):
@@ -86,7 +86,7 @@ class BaconSoupsRequired(Range):
     display_name = "Bacon Soups Required"
     range_start = 0
     range_end = 100
-    default_option = 75
+    default = 75
 
 
 class MinigameSanity(Toggle):

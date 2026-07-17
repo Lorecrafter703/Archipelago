@@ -1,58 +1,25 @@
-# APQuest Randomizer Setup Guide
+# Bendy and the Ink Machine Randomizer Setup Guide
 
 ## Required Software
 
-- [Archipelago](https://github.com/ArchipelagoMW/Archipelago/releases/latest)
-- [The APQuest apworld](https://github.com/NewSoupVi/Archipelago/releases), 
+- [Bendy and the Ink Machine]()
+- The [BATIM apworld](https://github.com/Lorecrafter703/Archipelago/releases), 
   if not bundled with your version of Archipelago
+- [Bendy and the Archipelago Machine](https://github.com/Lorecrafter703/BendyAndTheArchipelagoMachine/releases) mod
 
-## Optional Software
+## Installation
 
-- [APQuest AP Tracker](https://github.com/palex00/ap-quest-tracker/releases/latest), for use with
-[PopTracker](https://github.com/black-sliver/PopTracker/releases)
+1. Back up your save files. The mod is still in development, and currently does not preserve saves.
+   1. The saves will be in a file called **batim.game**, located in whichever directory steam stores
+   save files on your operating system.
+2. Download the latest release of the [Bendy and the Archipelago Machine](https://github.com/Lorecrafter703/BendyAndTheArchipelagoMachine/releases) mod
+3. Extract the zip file into the game's root directory where the exe file is located.
+4. Open the game, if all is well you should see a BepInEx console open up.
 
-## How to play
+## Joining a new MultiWorld
 
-First, you need a room to connect to. For this, you or someone you know has to generate a game.  
-This will not be explained here,
-but you can check the [Archipelago Setup Guide](/tutorial/Archipelago/setup_en#generating-a-game).
-
-You also need to have [Archipelago](https://github.com/ArchipelagoMW/Archipelago/releases/latest) installed
-and the [The APQuest apworld](https://github.com/NewSoupVi/Archipelago/releases) installed into Archipelago.
-
-From here, connecting to your APQuest slot is easy. There are two scenarios.
-
-### Webhost Room
-
-If your room is hosted on a WebHost (e.g. [archipelago.gg](https://archipelago.gg)),
-you should be able to simply click on your name in the player list.  
-This will open the Archipelago Launcher
-and ask you whether you want to connect with the Text Client or the APQuest Client.  
-Choose "APQuest Client". The rest should happen completely automatically and you should be able to play APQuest.
-
-### Locally hosted room
-
-If your room does not have a WebHost room page available, you can launch APQuest manually.  
-
-Open the Archipelago Launcher, and then select the APQuest Client from the list.  
-After a short while, the APQuest client should open.  
-Enter the server address at the top and click "Connect".  
-Then, enter your name. If a password exists, enter the password.  
-You should now be connected and able to play APQuest.
-
-## Switching Rooms
-
-The APQuest Client can seamlessly switch rooms without restarting.
-
-Simply click the "Disconnect" button, then connect to a different slot/room.
-
-## Auto-Tracking
-
-AP Quest has a fully functional map tracker that supports auto-tracking.
-
-1. Download [APQuest AP Tracker](https://github.com/palex00/ap-quest-tracker/releases/latest) and
-[PopTracker](https://github.com/black-sliver/PopTracker/releases).
-2. Put the tracker pack into packs/ in your PopTracker install.
-3. Open PopTracker, and load the APQuest pack.
-4. For autotracking, click on the "AP" symbol at the top.
-5. Enter the Archipelago server address (the one you connected your client to), slot name, and password.
+1. When the game opens up, you should see a new section in the top left to input connection information.
+2. After filling in the required fields, you may click **Begin**.
+3. On a successful connection, you will be able to choose a save file. (You may need to click Begin a second time)
+   - NOTE: Whichever save file you connect to first will be the save you must use every time you connect in the future.
+4. After choosing a save file, you will be able to continue to chapter select, and begin playing.
