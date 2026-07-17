@@ -244,7 +244,7 @@ def create_regular_locations(world: BATIMWorld) -> None:
         "CH1 Bacon Soup 18",
         "CH1 Bacon Soup 19",
         "CH1 Audio Log This Machine",
-        "CH1 Radio"
+        "CH1 Radio",
     ])
     ch1_intro.add_locations(ch1_intro_locations, BATIMLocation)
 
@@ -281,7 +281,7 @@ def create_regular_locations(world: BATIMWorld) -> None:
         "CH2 Audio Log New Actress",
         "CH2 Audio Log Crazy Sammy",
         "CH2 Audio Log Stupid Keys",
-        "CH2 Keys"
+        "CH2 Keys",
     ])
     ch2_intro.add_locations(ch2_intro_locations, BATIMLocation)
 
@@ -359,7 +359,7 @@ def create_regular_locations(world: BATIMWorld) -> None:
         "CH3 Audio Log Looking for Trouble",
         "CH3 Audio Log Man of Ideas",
         "CH3 Radio",
-        "CH3 Complete"
+        "CH3 Complete",
     ])
     ch3_alice_objectives.add_locations(ch3_alice_objectives_locations, BATIMLocation)
 
@@ -426,7 +426,7 @@ def create_regular_locations(world: BATIMWorld) -> None:
 
     # Minigame Sanity
     if world.options.minigame_sanity:
-        ch4_minigame_locations = get_location_names_with_ids(["CH4 Bulls Eye", "CH4 Call the Milk Man", "CH4 Wasting Time",])
+        ch4_minigame_locations = get_location_names_with_ids(["CH4 Bulls Eye", "CH4 Call the Milk Man", "CH4 Wasting Time"])
         ch4_after_book_puzzle.add_locations(ch4_minigame_locations, BATIMLocation)
 
     # theMeatly Sanity
