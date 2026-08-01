@@ -42,6 +42,7 @@ LOCATION_NAME_TO_ID = {
     "CH1 Audio Log This Machine": 128,
     "CH1 Radio": 129,
     "CH1 theMeatly": 130,
+    "CH1 Checkpoint Basement": 131,
     "CH1 Complete": 199,
     "CH2 Bacon Soup 0": 200,
     "CH2 Bacon Soup 1": 201,
@@ -85,6 +86,8 @@ LOCATION_NAME_TO_ID = {
     "CH2 Audio Log Quiet and Smelly Sewers": 239,
     "CH2 Radio": 240,
     "CH2 theMeatly": 241,
+    "CH2 Checkpoint Lost Keys": 242,
+    "CH2 Checkpoint Sammy's Office": 243,
     "CH2 Complete": 299,
     "CH3 Bacon Soup 0": 300,
     "CH3 Bacon Soup 1": 301,
@@ -125,18 +128,21 @@ LOCATION_NAME_TO_ID = {
     "CH3 Bacon Soup 36": 336,
     "CH3 Bacon Soup 37": 337,
     "CH3 Bacon Soup 38": 338,
-    "CH3 Audio Log Crooked Smile": 350,
-    "CH3 Audio Log Time to Believe": 351,
-    "CH3 Audio Log Everything is Coming Apart": 352,
-    "CH3 Audio Log Ink Pressure": 353,
-    "CH3 Audio Log Cutting Corners": 354,
-    "CH3 Audio Log Lunch with Joey": 355,
-    "CH3 Audio Log Crack a Smile": 356,
-    "CH3 Audio Log The Genius Upstairs": 357,
-    "CH3 Audio Log Looking for Trouble": 358,
-    "CH3 Audio Log Man of Ideas": 359,
-    "CH3 Radio": 360,
-    "CH3 theMeatly": 361,
+    "CH3 Audio Log Crooked Smile": 339,
+    "CH3 Audio Log Time to Believe": 340,
+    "CH3 Audio Log Everything is Coming Apart": 341,
+    "CH3 Audio Log Ink Pressure": 342,
+    "CH3 Audio Log Cutting Corners": 343,
+    "CH3 Audio Log Lunch with Joey": 344,
+    "CH3 Audio Log Crack a Smile": 345,
+    "CH3 Audio Log The Genius Upstairs": 346,
+    "CH3 Audio Log Looking for Trouble": 347,
+    "CH3 Audio Log Man of Ideas": 348,
+    "CH3 Radio": 349,
+    "CH3 theMeatly": 350,
+    "CH3 Checkpoint Decisions": 351,
+    "CH3 Checkpoint Angel's Bidding": 352,
+    "CH3 Checkpoint Butcher Gang": 353,
     "CH3 Complete": 399,
     "CH4 Bacon Soup 0": 400,
     "CH4 Bacon Soup 1": 401,
@@ -162,15 +168,17 @@ LOCATION_NAME_TO_ID = {
     "CH4 Wasting Time": 421,
     "CH4 Bertrum Boss": 422,
     "CH4 Brute Boris Boss": 423,
-    "CH4 Audio Log Indiscernible": 430,
-    "CH4 Audio Log Behind Closed Doors": 431,
-    "CH4 Audio Log Colossal Wonders": 432,
-    "CH4 Audio Log Playing Games": 433,
-    "CH4 Audio Log Mechanical Demon": 434,
-    "CH4 Audio Log Bertrum's Reveal": 435,
-    "CH4 Audio Log Turn it Off": 436,
-    "CH4 Radio": 437,
-    "CH4 theMeatly": 438,
+    "CH4 Audio Log Indiscernible": 424,
+    "CH4 Audio Log Behind Closed Doors": 425,
+    "CH4 Audio Log Colossal Wonders": 426,
+    "CH4 Audio Log Playing Games": 427,
+    "CH4 Audio Log Mechanical Demon": 428,
+    "CH4 Audio Log Bertrum's Reveal": 429,
+    "CH4 Audio Log Turn it Off": 430,
+    "CH4 Radio": 431,
+    "CH4 theMeatly": 432,
+    "CH4 Checkpoint Warehouse": 433,
+    "CH4 Checkpoint Haunted House": 434,
     "CH4 Complete": 499,
     "CH5 Bacon Soup 0": 500,
     "CH5 Bacon Soup 1": 501,
@@ -180,14 +188,17 @@ LOCATION_NAME_TO_ID = {
     "CH5 Bacon Soup 5": 505,
     "CH5 Bacon Soup 6": 506,
     "CH5 Sammy Lawrence Boss": 507,
-    "CH5 Audio Log Office Report": 520,
-    "CH5 Audio Log Chocolate Cake": 521,
-    "CH5 Audio Log The Big Picture": 522,
-    "CH5 Audio Log Thousands of Souls": 523,
-    "CH5 Audio Log Bringing Alice to Life": 524,
-    "CH5 Audio Log Bendy's End": 525,
-    "CH5 Radio": 526,
-    "CH5 theMeatly": 527,
+    "CH5 Audio Log Office Report": 508,
+    "CH5 Audio Log Chocolate Cake": 509,
+    "CH5 Audio Log The Big Picture": 510,
+    "CH5 Audio Log Thousands of Souls": 511,
+    "CH5 Audio Log Bringing Alice to Life": 512,
+    "CH5 Audio Log Bendy's End": 513,
+    "CH5 Radio": 514,
+    "CH5 theMeatly": 515,
+    "CH5 Checkpoint Administration": 516,
+    "CH5 Checkpoint The Ink Machine": 517,
+    "CH5 Complete": 599,
 }
 
 
@@ -215,7 +226,8 @@ def create_regular_locations(world: BATIMWorld) -> None:
     ch4_intro = world.get_region("CH4 Intro")
     ch4_after_book_puzzle = world.get_region("CH4 After Book Puzzle")
     ch4_after_bertrum = world.get_region("CH4 After Bertrum")
-    ch5 = world.get_region("CH5")
+    ch5_intro = world.get_region("CH5 Intro")
+    ch5_boss = world.get_region("CH5 Boss")
 
     ch1_intro_locations = get_location_names_with_ids([
         "CH1 Doll",
@@ -406,7 +418,7 @@ def create_regular_locations(world: BATIMWorld) -> None:
     ])
     ch4_after_bertrum.add_locations(ch4_after_bertrum_locations, BATIMLocation)
 
-    ch5_locations = get_location_names_with_ids([
+    ch5_intro_locations = get_location_names_with_ids([
         "CH5 Bacon Soup 0",
         "CH5 Bacon Soup 1",
         "CH5 Bacon Soup 2",
@@ -420,10 +432,14 @@ def create_regular_locations(world: BATIMWorld) -> None:
         "CH5 Audio Log Chocolate Cake",
         "CH5 Audio Log Thousands of Souls",
         "CH5 Audio Log Bringing Alice to Life",
-        "CH5 Audio Log Bendy's End",
         "CH5 Radio",
     ])
-    ch5.add_locations(ch5_locations, BATIMLocation)
+    ch5_intro.add_locations(ch5_intro_locations, BATIMLocation)
+
+    ch5_boss_locations = get_location_names_with_ids([
+        "CH5 Audio Log Bendy's End",
+    ])
+    ch5_boss.add_locations(ch5_boss_locations, BATIMLocation)
 
     # Minigame Sanity
     if world.options.minigame_sanity:
@@ -436,7 +452,18 @@ def create_regular_locations(world: BATIMWorld) -> None:
         ch2_after_valve.add_locations(get_location_names_with_ids(["CH2 theMeatly"]), BATIMLocation)
         ch3_alice_objectives.add_locations(get_location_names_with_ids(["CH3 theMeatly"]), BATIMLocation)
         ch4_intro.add_locations(get_location_names_with_ids(["CH4 theMeatly"]), BATIMLocation)
-        ch5.add_locations(get_location_names_with_ids(["CH5 theMeatly"]), BATIMLocation)
+        ch5_intro.add_locations(get_location_names_with_ids(["CH5 theMeatly"]), BATIMLocation)
+
+    # Checkpoint Sanity
+    if world.options.checkpoint_sanity:
+        ch1_basement.add_locations(get_location_names_with_ids(["CH1 Checkpoint Basement"]), BATIMLocation)
+        ch2_intro.add_locations(get_location_names_with_ids(["CH2 Checkpoint Lost Keys"]), BATIMLocation)
+        ch2_after_valve.add_locations(get_location_names_with_ids(["CH2 Checkpoint Sammy's Office"]), BATIMLocation)
+        ch3_intro.add_locations(get_location_names_with_ids(["CH3 Checkpoint Decisions"]))
+        ch3_alice_objectives.add_locations(get_location_names_with_ids(["CH3 Checkpoint Angel's Bidding", "CH3 Checkpoint Butcher Gang"]), BATIMLocation)
+        ch4_after_book_puzzle.add_locations(get_location_names_with_ids(["CH4 Checkpoint Warehouse"]), BATIMLocation)
+        ch4_after_bertrum.add_locations(get_location_names_with_ids(["CH4 Checkpoint Haunted House"]), BATIMLocation)
+        ch5_intro.add_locations(get_location_names_with_ids(["CH5 Checkpoint Administration", "CH5 Checkpoint The Ink Machine"]), BATIMLocation)
 
     # FIXME Special Options
     # # Locations may be in different regions depending on the player's options.
@@ -459,5 +486,5 @@ def create_regular_locations(world: BATIMWorld) -> None:
 
 
 def create_events(world: BATIMWorld) -> None:
-    ch5 = world.get_region("CH5")
+    ch5 = world.get_region("CH5 Boss")
     ch5.add_event("Beast Bendy Defeated", "Victory", location_type=BATIMLocation, item_type=items.BATIMItem)

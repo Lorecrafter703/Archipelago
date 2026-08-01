@@ -19,15 +19,25 @@ ITEM_NAME_TO_ID = {
     "CH1 Inkwell": 104,
     "CH1 Record": 105,
     "CH1 Wrench": 106,
+    "CH1 Checkpoint Basement": 107,
     "Unlock CH2": 200,
     "CH2 Keys": 201,
     "CH2 Valve": 202,
+    "CH2 Checkpoint Lost Keys": 203,
+    "CH2 Checkpoint Sammy's Office": 204,
     "Unlock CH3": 300,
     "CH3 Toys": 301,
+    "CH3 Checkpoint Decisions": 302,
+    "CH3 Checkpoint Angel's Bidding": 303,
+    "CH3 Checkpoint Butcher Gang": 304,
     "Unlock CH4": 400,
     "CH4 Books": 401,
     "CH4 Bossfight Bertrum": 402,
-    #"Unlock CH5": 500,
+    "CH4 Checkpoint Warehouse": 403,
+    "CH4 Checkpoint Haunted House": 404,
+    "Unlock CH5": 500,
+    "CH5 Checkpoint Administration": 501,
+    "CH5 Checkpoint The Ink Machine": 502,
 }
 
 DEFAULT_ITEM_CLASSIFICATIONS = {
@@ -46,8 +56,18 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "Unlock CH2": ItemClassification.progression,
     "Unlock CH3": ItemClassification.progression,
     "Unlock CH4": ItemClassification.progression,
-    #"Unlock CH5": ItemClassification.progression,
+    "Unlock CH5": ItemClassification.progression,
     "Bacon Soup": ItemClassification.progression,
+    "CH1 Checkpoint Basement": ItemClassification.useful,
+    "CH2 Checkpoint Lost Keys": ItemClassification.useful,
+    "CH2 Checkpoint Sammy's Office": ItemClassification.useful,
+    "CH3 Checkpoint Decisions": ItemClassification.useful,
+    "CH3 Checkpoint Angel's Bidding": ItemClassification.useful,
+    "CH3 Checkpoint Butcher Gang": ItemClassification.useful,
+    "CH4 Checkpoint Warehouse": ItemClassification.useful,
+    "CH4 Checkpoint Haunted House": ItemClassification.useful,
+    "CH5 Checkpoint Administration": ItemClassification.useful,
+    "CH5 Checkpoint The Ink Machine": ItemClassification.useful,
     "Filler": ItemClassification.filler,
     "Trap": ItemClassification.trap,
 }
@@ -104,7 +124,7 @@ def create_all_items(world: BATIMWorld) -> None:
     ch2 = world.create_item("Unlock CH2")
     ch3 = world.create_item("Unlock CH3")
     ch4 = world.create_item("Unlock CH4")
-    # ch5 = world.create_item("Unlock CH5")
+    ch5 = world.create_item("Unlock CH5")
 
     match world.options.starting_chapter:
         case StartingChapter.option_one:
@@ -112,21 +132,31 @@ def create_all_items(world: BATIMWorld) -> None:
             itempool.append(ch2)
             itempool.append(ch3)
             itempool.append(ch4)
+            itempool.append(ch5)
         case StartingChapter.option_two:
             itempool.append(ch1)
             world.push_precollected(ch2)
             itempool.append(ch3)
             itempool.append(ch4)
+            itempool.append(ch5)
         case StartingChapter.option_three:
             itempool.append(ch1)
             itempool.append(ch2)
             world.push_precollected(ch3)
             itempool.append(ch4)
+            itempool.append(ch5)
         case StartingChapter.option_four:
             itempool.append(ch1)
             itempool.append(ch2)
             itempool.append(ch3)
             world.push_precollected(ch4)
+            itempool.append(ch5)
+        case StartingChapter.option_five:
+            itempool.append(ch1)
+            itempool.append(ch2)
+            itempool.append(ch3)
+            itempool.append(ch4)
+            world.push_precollected(ch5)
 
     # Bacon Soups
     bacon_soups_required = int(world.options.total_bacon_soups * (world.options.bacon_soups_required / 100))

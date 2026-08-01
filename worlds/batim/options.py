@@ -66,12 +66,13 @@ class StartingChapter(Choice):
     option_two = 1
     option_three = 2
     option_four = 3
+    option_five = 4
     default = option_one
 
 
 class TotalBaconSoups(Range):
     """
-    The total number of Bacon Soups included in the world
+    The total number of Bacon Soups included in the world.
     """
     display_name = "Total Bacon Soups"
     range_start = 0
@@ -81,7 +82,7 @@ class TotalBaconSoups(Range):
 
 class BaconSoupsRequired(Range):
     """
-    What percentage of the total Bacon Soups will be required to begin Chapter 5
+    What percentage of the total Bacon Soups will be required to begin Chapter 5.
     """
     display_name = "Bacon Soups Required"
     range_start = 0
@@ -91,17 +92,23 @@ class BaconSoupsRequired(Range):
 
 class MinigameSanity(Toggle):
     """
-    Getting perfect scores on the three minigames in the Storage 9 warehouse sends checks
+    Getting perfect scores on the three minigames in the Storage 9 warehouse sends checks.
     """
     display_name = "Minigame Sanity"
 
 
 class TheMeatlySanity(Toggle):
     """
-    Finding hidden theMeatly cutouts sends checks
+    Finding hidden theMeatly cutouts sends checks.
     """
     display_name = "theMeatly Sanity"
 
+
+class CheckpointSanity(Toggle):
+    """
+    Randomizes Checkpoints into the item pool. Reaching the areas that would typically unlock checkpoints instead will send a check.
+    """
+    display_name = "Checkpoint Sanity"
 
 # We must now define a dataclass inheriting from PerGameCommonOptions that we put all our options in.
 # This is in the format "option_name_in_snake_case: OptionClassName".
@@ -112,6 +119,7 @@ class BATIMOptions(PerGameCommonOptions):
     bacon_soups_required: BaconSoupsRequired
     minigame_sanity: MinigameSanity
     the_meatly_sanity: TheMeatlySanity
+    checkpoint_sanity: CheckpointSanity
 
 
 # If we want to group our options by similar type, we can do so as well. This looks nice on the website.
@@ -122,7 +130,7 @@ option_groups = [
     ),
     OptionGroup(
         "Sanity Options",
-        [MinigameSanity, TheMeatlySanity],
+        [MinigameSanity, TheMeatlySanity, CheckpointSanity],
     ),
 ]
 
