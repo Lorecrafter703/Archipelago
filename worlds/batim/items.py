@@ -126,6 +126,22 @@ def create_all_items(world: BATIMWorld) -> None:
     ch4 = world.create_item("Unlock CH4")
     ch5 = world.create_item("Unlock CH5")
 
+    # Checkpoints
+    if world.options.checkpoint_sanity:
+        checkpoints: list[Item] = [
+            world.create_item("CH1 Checkpoint Basement"),
+            world.create_item("CH2 Checkpoint Lost Keys"),
+            world.create_item("CH2 Checkpoint Sammy's Office"),
+            world.create_item("CH3 Checkpoint Decisions"),
+            world.create_item("CH3 Checkpoint Angel's Bidding"),
+            world.create_item("CH3 Checkpoint Butcher Gang"),
+            world.create_item("CH4 Checkpoint Warehouse"),
+            world.create_item("CH4 Checkpoint Haunted House"),
+            world.create_item("CH5 Checkpoint Administration"),
+            world.create_item("CH5 Checkpoint The Ink Machine"),
+        ]
+        itempool += checkpoints
+
     match world.options.starting_chapter:
         case StartingChapter.option_one:
             world.push_precollected(ch1)

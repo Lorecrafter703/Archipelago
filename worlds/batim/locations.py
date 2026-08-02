@@ -217,18 +217,6 @@ def create_all_locations(world: BATIMWorld) -> None:
 
 def create_regular_locations(world: BATIMWorld) -> None:
     ch1_intro = world.get_region("CH1 Intro")
-    ch1_basement = world.get_region("CH1 Basement")
-    ch2_intro = world.get_region("CH2 Intro")
-    ch2_after_keys = world.get_region("CH2 After Keys")
-    ch2_after_valve = world.get_region("CH2 After Valve")
-    ch3_intro = world.get_region("CH3 Intro")
-    ch3_alice_objectives = world.get_region("CH3 Alice Objectives")
-    ch4_intro = world.get_region("CH4 Intro")
-    ch4_after_book_puzzle = world.get_region("CH4 After Book Puzzle")
-    ch4_after_bertrum = world.get_region("CH4 After Bertrum")
-    ch5_intro = world.get_region("CH5 Intro")
-    ch5_boss = world.get_region("CH5 Boss")
-
     ch1_intro_locations = get_location_names_with_ids([
         "CH1 Doll",
         "CH1 Gear",
@@ -260,9 +248,11 @@ def create_regular_locations(world: BATIMWorld) -> None:
     ])
     ch1_intro.add_locations(ch1_intro_locations, BATIMLocation)
 
+    ch1_basement = world.get_region("CH1 Basement")
     ch1_basement_locations = get_location_names_with_ids(["CH1 Bacon Soup 20", "CH1 Bacon Soup 0", "CH1 Audio Log Dark and Cold", "CH1 Complete"])
     ch1_basement.add_locations(ch1_basement_locations, BATIMLocation)
 
+    ch2_intro = world.get_region("CH2 Intro")
     ch2_intro_locations = get_location_names_with_ids([
         "CH2 Bacon Soup 0",
         "CH2 Bacon Soup 3",
@@ -297,6 +287,7 @@ def create_regular_locations(world: BATIMWorld) -> None:
     ])
     ch2_intro.add_locations(ch2_intro_locations, BATIMLocation)
 
+    ch2_after_keys = world.get_region("CH2 After Keys")
     ch2_after_keys_locations = get_location_names_with_ids([
         "CH2 Bacon Soup 1",
         "CH2 Bacon Soup 2",
@@ -309,6 +300,7 @@ def create_regular_locations(world: BATIMWorld) -> None:
     ])
     ch2_after_keys.add_locations(ch2_after_keys_locations, BATIMLocation)
 
+    ch2_after_valve = world.get_region("CH2 After Valve")
     ch2_after_valve_locations = get_location_names_with_ids([
         "CH2 Bacon Soup 21",
         "CH2 Bacon Soup 22",
@@ -317,20 +309,26 @@ def create_regular_locations(world: BATIMWorld) -> None:
     ])
     ch2_after_valve.add_locations(ch2_after_valve_locations, BATIMLocation)
 
+    ch3_intro = world.get_region("CH3 Intro")
     ch3_intro_locations = get_location_names_with_ids([
         "CH3 Bacon Soup 0",
         "CH3 Bacon Soup 1",
         "CH3 Bacon Soup 2",
         "CH3 Bacon Soup 3",
         "CH3 Bacon Soup 4",
-        "CH3 Bacon Soup 22",
-        "CH3 Bacon Soup 24",
         "CH3 Bacon Soup 25",
         "CH3 Bacon Soup 29",
         "CH3 Bacon Soup 30",
+        "CH3 Bacon Soup 38",
+    ])
+    ch3_intro.add_locations(ch3_intro_locations, BATIMLocation)
+
+    ch3_after_toys = world.get_region("CH3 After Toys")
+    ch3_after_toys_locations = get_location_names_with_ids([
+        "CH3 Bacon Soup 22",
+        "CH3 Bacon Soup 24",
         "CH3 Bacon Soup 33",
         "CH3 Bacon Soup 36",
-        "CH3 Bacon Soup 38",
         "CH3 Audio Log Crooked Smile",
         "CH3 Audio Log Everything is Coming Apart",
         "CH3 Audio Log Time to Believe",
@@ -338,8 +336,9 @@ def create_regular_locations(world: BATIMWorld) -> None:
         "CH3 Audio Log Cutting Corners",
         "CH3 Audio Log Lunch with Joey",
     ])
-    ch3_intro.add_locations(ch3_intro_locations, BATIMLocation)
+    ch3_after_toys.add_locations(ch3_after_toys_locations, BATIMLocation)
 
+    ch3_alice_objectives = world.get_region("CH3 Alice Objectives")
     ch3_alice_objectives_locations = get_location_names_with_ids([
         "CH3 Bacon Soup 5",
         "CH3 Bacon Soup 6",
@@ -369,13 +368,19 @@ def create_regular_locations(world: BATIMWorld) -> None:
         "CH3 Bacon Soup 37",
         "CH3 Audio Log Crack a Smile",
         "CH3 Audio Log The Genius Upstairs",
-        "CH3 Audio Log Looking for Trouble",
-        "CH3 Audio Log Man of Ideas",
         "CH3 Radio",
-        "CH3 Complete",
     ])
     ch3_alice_objectives.add_locations(ch3_alice_objectives_locations, BATIMLocation)
 
+    ch3_level_14 = world.get_region("CH3 Level 14")
+    ch3_level_14_locations = get_location_names_with_ids([
+        "CH3 Audio Log Looking for Trouble",
+        "CH3 Audio Log Man of Ideas",
+        "CH3 Complete",
+    ])
+    ch3_level_14.add_locations(ch3_level_14_locations, BATIMLocation)
+
+    ch4_intro = world.get_region("CH4 Intro")
     ch4_intro_locations = get_location_names_with_ids([
         "CH4 Bacon Soup 1",
         "CH4 Bacon Soup 6",
@@ -385,7 +390,19 @@ def create_regular_locations(world: BATIMWorld) -> None:
     ])
     ch4_intro.add_locations(ch4_intro_locations, BATIMLocation)
 
+    ch4_after_book_puzzle = world.get_region("CH4 After Book Puzzle")
     ch4_after_book_puzzle_locations = get_location_names_with_ids([
+        "CH4 Bacon Soup 15",
+        "CH4 Bacon Soup 16",
+        "CH4 Bacon Soup 17",
+        "CH4 Bacon Soup 18",
+        "CH4 Audio Log Colossal Wonders",
+        "CH4 Radio",
+    ])
+    ch4_after_book_puzzle.add_locations(ch4_after_book_puzzle_locations, BATIMLocation)
+
+    ch4_warehouse = world.get_region("CH4 Warehouse")
+    ch4_warehouse_locations = get_location_names_with_ids([
         "CH4 Bacon Soup 0",
         "CH4 Bacon Soup 2",
         "CH4 Bacon Soup 3",
@@ -394,39 +411,45 @@ def create_regular_locations(world: BATIMWorld) -> None:
         "CH4 Bacon Soup 8",
         "CH4 Bacon Soup 9",
         "CH4 Bacon Soup 10",
-        "CH4 Bacon Soup 15",
-        "CH4 Bacon Soup 16",
-        "CH4 Bacon Soup 17",
-        "CH4 Bacon Soup 18",
-        "CH4 Audio Log Colossal Wonders",
         "CH4 Audio Log Playing Games",
         "CH4 Audio Log Mechanical Demon",
-        "CH4 Radio",
     ])
-    ch4_after_book_puzzle.add_locations(ch4_after_book_puzzle_locations, BATIMLocation)
+    ch4_warehouse.add_locations(ch4_warehouse_locations, BATIMLocation)
 
+    ch4_after_bertrum = world.get_region("CH4 After Bertrum")
     ch4_after_bertrum_locations = get_location_names_with_ids([
-        "CH4 Bacon Soup 5",
         "CH4 Bacon Soup 11",
         "CH4 Bacon Soup 12",
-        "CH4 Bacon Soup 13",
         "CH4 Bertrum Boss",
-        "CH4 Brute Boris Boss",
         "CH4 Audio Log Bertrum's Reveal",
         "CH4 Audio Log Turn it Off",
-        "CH4 Complete",
     ])
     ch4_after_bertrum.add_locations(ch4_after_bertrum_locations, BATIMLocation)
 
+    ch4_haunted_house = world.get_region("CH4 Haunted House")
+    ch4_haunted_house_locations = get_location_names_with_ids([
+        "CH4 Bacon Soup 5",
+        "CH4 Bacon Soup 13",
+        "CH4 Brute Boris Boss",
+        "CH4 Complete",
+    ])
+    ch4_haunted_house.add_locations(ch4_haunted_house_locations, BATIMLocation)
+
+    ch5_intro = world.get_region("CH5 Intro")
     ch5_intro_locations = get_location_names_with_ids([
         "CH5 Bacon Soup 0",
         "CH5 Bacon Soup 1",
         "CH5 Bacon Soup 2",
         "CH5 Bacon Soup 3",
+        "CH5 Sammy Lawrence Boss",
+    ])
+    ch5_intro.add_locations(ch5_intro_locations, BATIMLocation)
+
+    ch5_administration = world.get_region("CH5 Administration")
+    ch5_administration_locations = get_location_names_with_ids([
         "CH5 Bacon Soup 4",
         "CH5 Bacon Soup 5",
         "CH5 Bacon Soup 6",
-        "CH5 Sammy Lawrence Boss",
         "CH5 Audio Log Office Report",
         "CH5 Audio Log The Big Picture",
         "CH5 Audio Log Chocolate Cake",
@@ -434,10 +457,12 @@ def create_regular_locations(world: BATIMWorld) -> None:
         "CH5 Audio Log Bringing Alice to Life",
         "CH5 Radio",
     ])
-    ch5_intro.add_locations(ch5_intro_locations, BATIMLocation)
+    ch5_administration.add_locations(ch5_administration_locations, BATIMLocation)
 
+    ch5_boss = world.get_region("CH5 Boss")
     ch5_boss_locations = get_location_names_with_ids([
         "CH5 Audio Log Bendy's End",
+        "CH5 Complete",
     ])
     ch5_boss.add_locations(ch5_boss_locations, BATIMLocation)
 
@@ -448,22 +473,24 @@ def create_regular_locations(world: BATIMWorld) -> None:
 
     # theMeatly Sanity
     if world.options.the_meatly_sanity:
-        ch1_basement.add_locations(get_location_names_with_ids(["CH1 theMeatly"]), BATIMLocation)
+        ch1_intro.add_locations(get_location_names_with_ids(["CH1 theMeatly"]), BATIMLocation)
         ch2_after_valve.add_locations(get_location_names_with_ids(["CH2 theMeatly"]), BATIMLocation)
-        ch3_alice_objectives.add_locations(get_location_names_with_ids(["CH3 theMeatly"]), BATIMLocation)
+        ch3_level_14.add_locations(get_location_names_with_ids(["CH3 theMeatly"]), BATIMLocation)
         ch4_intro.add_locations(get_location_names_with_ids(["CH4 theMeatly"]), BATIMLocation)
-        ch5_intro.add_locations(get_location_names_with_ids(["CH5 theMeatly"]), BATIMLocation)
+        ch5_administration.add_locations(get_location_names_with_ids(["CH5 theMeatly"]), BATIMLocation)
 
     # Checkpoint Sanity
     if world.options.checkpoint_sanity:
-        ch1_basement.add_locations(get_location_names_with_ids(["CH1 Checkpoint Basement"]), BATIMLocation)
+        ch1_intro.add_locations(get_location_names_with_ids(["CH1 Checkpoint Basement"]), BATIMLocation)
         ch2_intro.add_locations(get_location_names_with_ids(["CH2 Checkpoint Lost Keys"]), BATIMLocation)
         ch2_after_valve.add_locations(get_location_names_with_ids(["CH2 Checkpoint Sammy's Office"]), BATIMLocation)
-        ch3_intro.add_locations(get_location_names_with_ids(["CH3 Checkpoint Decisions"]))
-        ch3_alice_objectives.add_locations(get_location_names_with_ids(["CH3 Checkpoint Angel's Bidding", "CH3 Checkpoint Butcher Gang"]), BATIMLocation)
+        ch3_intro.add_locations(get_location_names_with_ids(["CH3 Checkpoint Decisions"]), BATIMLocation)
+        ch3_after_toys.add_locations(get_location_names_with_ids(["CH3 Checkpoint Angel's Bidding"]), BATIMLocation)
+        ch3_alice_objectives.add_locations(get_location_names_with_ids(["CH3 Checkpoint Butcher Gang"]), BATIMLocation)
         ch4_after_book_puzzle.add_locations(get_location_names_with_ids(["CH4 Checkpoint Warehouse"]), BATIMLocation)
         ch4_after_bertrum.add_locations(get_location_names_with_ids(["CH4 Checkpoint Haunted House"]), BATIMLocation)
-        ch5_intro.add_locations(get_location_names_with_ids(["CH5 Checkpoint Administration", "CH5 Checkpoint The Ink Machine"]), BATIMLocation)
+        ch5_intro.add_locations(get_location_names_with_ids(["CH5 Checkpoint Administration"]), BATIMLocation)
+        ch5_administration.add_locations(get_location_names_with_ids(["CH5 Checkpoint The Ink Machine"]), BATIMLocation)
 
     # FIXME Special Options
     # # Locations may be in different regions depending on the player's options.
