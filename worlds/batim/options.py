@@ -18,6 +18,21 @@ class StartingChapter(Choice):
     default = option_one
 
 
+class DeathlessChallenges(Choice):
+    """
+    When this option is enabled, picking up the tommy gun, and completing each of the three lever
+    challenges will send checks. Likewise, the tommy gun item will be randomized into the pool.
+    After receiving the tommy gun item, it will become permanently accessible, regardless of chosen
+    path.
+    """
+    display_name = "Deathless Challenges"
+    option_none = 0
+    option_tommy_gun_only = 1
+    option_lever_challenge_only = 2
+    option_both = 3
+    default = option_none
+
+
 class TotalBaconSoups(Range):
     """
     The total number of Bacon Soups included in the world.
@@ -67,6 +82,7 @@ class BATIMOptions(PerGameCommonOptions):
     minigame_sanity: MinigameSanity
     the_meatly_sanity: TheMeatlySanity
     checkpoint_sanity: CheckpointSanity
+    deathless_challenges: DeathlessChallenges
 
 
 option_groups = [
@@ -76,18 +92,19 @@ option_groups = [
     ),
     OptionGroup(
         "Sanity Options",
-        [MinigameSanity, TheMeatlySanity, CheckpointSanity],
+        [MinigameSanity, TheMeatlySanity, CheckpointSanity, DeathlessChallenges],
     ),
 ]
 
 option_presets = {
     "default": {
-        "starting_chapter": StartingChapter.option_one,
+        "starting_chapter": StartingChapter.default,
         "total_bacon_soups": 40,
         "bacon_soups_required": 75,
         "minigame_sanity": False,
         "the_meatly_sanity": False,
         "checkpoint_sanity": False,
+        "deathless_challenges": DeathlessChallenges.default,
     },
     "insanity": {
         "starting_chapter": "random",
@@ -96,6 +113,7 @@ option_presets = {
         "minigame_sanity": True,
         "the_meatly_sanity": True,
         "checkpoint_sanity": True,
+        "deathless_challenges": DeathlessChallenges.option_both,
     },
     "bk simulator": {
         "starting_chapter": StartingChapter.option_four,
@@ -104,6 +122,7 @@ option_presets = {
         "minigame_sanity": True,
         "the_meatly_sanity": True,
         "checkpoint_sanity": True,
+        "deathless_challenges": DeathlessChallenges.option_both,
     },
     "all random": {
         "starting_chapter": "random",
@@ -112,5 +131,6 @@ option_presets = {
         "minigame_sanity": "random",
         "the_meatly_sanity": "random",
         "checkpoint_sanity": "random",
+        "deathless_challenges": "random",
     },
 }

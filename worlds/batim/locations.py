@@ -143,6 +143,10 @@ LOCATION_NAME_TO_ID = {
     "CH3 Checkpoint Decisions": 351,
     "CH3 Checkpoint Angel's Bidding": 352,
     "CH3 Checkpoint Butcher Gang": 353,
+    "CH3 Tommy Gun": 354,
+    "CH3 Lever Challenge 1": 355,
+    "CH3 Lever Challenge 2": 356,
+    "CH3 Lever Challenge 3": 357,
     "CH3 Complete": 399,
     "CH4 Bacon Soup 0": 400,
     "CH4 Bacon Soup 1": 401,
@@ -369,6 +373,7 @@ def create_regular_locations(world: BATIMWorld) -> None:
         "CH3 Audio Log Crack a Smile",
         "CH3 Audio Log The Genius Upstairs",
         "CH3 Radio",
+        "CH3 Tommy Gun",
     ])
     ch3_alice_objectives.add_locations(ch3_alice_objectives_locations, BATIMLocation)
 
@@ -376,6 +381,9 @@ def create_regular_locations(world: BATIMWorld) -> None:
     ch3_level_14_locations = get_location_names_with_ids([
         "CH3 Audio Log Looking for Trouble",
         "CH3 Audio Log Man of Ideas",
+        "CH3 Lever Challenge 1",
+        "CH3 Lever Challenge 2",
+        "CH3 Lever Challenge 3",
         "CH3 Complete",
     ])
     ch3_level_14.add_locations(ch3_level_14_locations, BATIMLocation)

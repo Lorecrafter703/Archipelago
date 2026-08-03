@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from BaseClasses import Item, ItemClassification
-from .options import StartingChapter, TotalBaconSoups, BaconSoupsRequired
+from .options import StartingChapter, TotalBaconSoups, BaconSoupsRequired, DeathlessChallenges
 
 if TYPE_CHECKING:
     from .world import BATIMWorld
@@ -32,6 +32,7 @@ ITEM_NAME_TO_ID = {
     "CH3 Checkpoint Decisions": 302,
     "CH3 Checkpoint Angel's Bidding": 303,
     "CH3 Checkpoint Butcher Gang": 304,
+    "CH3 Tommy Gun": 305,
     "Unlock CH4": 400,
     "CH4 Books": 401,
     "CH4 Bossfight Bertrum": 402,
@@ -70,6 +71,7 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "CH4 Checkpoint Haunted House": ItemClassification.useful,
     "CH5 Checkpoint Administration": ItemClassification.useful,
     "CH5 Checkpoint The Ink Machine": ItemClassification.useful,
+    "CH3 Tommy Gun": ItemClassification.useful,
     "Empty Soup Can": ItemClassification.filler,
     "Empty Ink Well": ItemClassification.filler,
     "Broken Banjo String": ItemClassification.filler,
@@ -131,6 +133,11 @@ def create_all_items(world: BATIMWorld) -> None:
             world.create_item("CH5 Checkpoint The Ink Machine"),
         ]
         itempool += checkpoints
+
+    # Tommy Gun
+    if (world.options.deathless_challenges == DeathlessChallenges.option_tommy_gun_only or
+            world.options.deathless_challenges == DeathlessChallenges.option_both):
+        itempool += [world.create_item("CH3 Tommy Gun")]
 
     # Bacon Soups
     bacon_soups_required = int(world.options.total_bacon_soups * (world.options.bacon_soups_required / 100))
