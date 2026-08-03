@@ -11,7 +11,9 @@ if TYPE_CHECKING:
 ITEM_NAME_TO_ID = {
     "Bacon Soup": 1,
     "Trap": 2,
-    "Bacon Soup (Used)": 3,
+    "Empty Soup Can": 3,
+    "Empty Ink Well": 4,
+    "Broken Banjo String": 5,
     "Unlock CH1": 100,
     "CH1 Book": 101,
     "CH1 Doll": 102,
@@ -68,7 +70,9 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "CH4 Checkpoint Haunted House": ItemClassification.useful,
     "CH5 Checkpoint Administration": ItemClassification.useful,
     "CH5 Checkpoint The Ink Machine": ItemClassification.useful,
-    "Bacon Soup (Used)": ItemClassification.filler,
+    "Empty Soup Can": ItemClassification.filler,
+    "Empty Ink Well": ItemClassification.filler,
+    "Broken Banjo String": ItemClassification.filler,
     "Trap": ItemClassification.trap,
 }
 
@@ -77,18 +81,13 @@ class BATIMItem(Item):
 
 
 def get_random_filler_item_name(world: BATIMWorld) -> str:
-    return "Bacon Soup (Used)"
-    # FIXME Multiple Filler Items if needed
-    # # APQuest has an option called "trap_chance".
-    # # This is the percentage chance that each filler item is a Math Trap instead of a Confetti Cannon.
-    # # For this purpose, we need to use a random generator.
-    #
-    # # IMPORTANT: Whenever you need to use a random generator, you must use world.random.
-    # # This ensures that generating with the same generator seed twice yields the same output.
-    # # DO NOT use a bare random object from Python's built-in random module.
-    # if world.random.randint(0, 99) < world.options.trap_chance:
-    #     return "Math Trap"
-    # return "Confetti Cannon"
+    filler_items: list[str] = [
+        "Empty Soup Can",
+        "Empty Ink Well",
+        "Broken Banjo String",
+    ]
+    num = world.random.randint(0, 2)
+    return filler_items[num]
 
 
 def create_item_with_correct_classification(world: BATIMWorld, name: str) -> BATIMItem:
