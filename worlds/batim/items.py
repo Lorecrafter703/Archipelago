@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from BaseClasses import Item, ItemClassification
-from .options import StartingChapter, TotalBaconSoups, BaconSoupsRequired, DeathlessChallenges
+from .options import StartingChapter, TotalBaconSoups, BaconSoupsRequired
 
 if TYPE_CHECKING:
     from .world import BATIMWorld
@@ -78,6 +78,7 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "Trap": ItemClassification.trap,
 }
 
+
 class BATIMItem(Item):
     game = "Bendy and the Ink Machine"
 
@@ -98,50 +99,58 @@ def create_item_with_correct_classification(world: BATIMWorld, name: str) -> BAT
 
 
 def create_all_items(world: BATIMWorld) -> None:
-    # Standard Items
-    itempool: list[Item] = [
+    # Correct Yaml Options
+    starting_chapter = int(world.options.starting_chapter)
+    last_chapter = 4 if world.options.include_later_chapters else int(world.options.goal_chapter)
+    bacon_soups_total = int(world.options.total_bacon_soups)
+
+    itempool: list[Item] = []
+
+    # Bacon Soups
+    itempool += [world.create_item("Bacon Soup") for _ in range(bacon_soups_total)]
+
+    # Chapter Unlocks
+    for i in range (0, last_chapter + 1):
+        if i != starting_chapter:
+            itempool += [world.create_item("Unlock CH" + str(i + 1))]
+    world.push_precollected(world.create_item("Unlock CH" + str(starting_chapter + 1)))
+
+    # Chapter 1 Items
+    itempool += [
         world.create_item("CH1 Doll"),
         world.create_item("CH1 Gear"),
         world.create_item("CH1 Wrench"),
         world.create_item("CH1 Record"),
         world.create_item("CH1 Inkwell"),
         world.create_item("CH1 Book"),
-        world.create_item("CH2 Keys"),
-        world.create_item("CH2 Valve"),
-        world.create_item("CH3 Toys"),
-        world.create_item("CH4 Books"),
-        world.create_item("CH4 Bossfight Bertrum"),
     ]
-
-    # Chapter Unlocks
-    starting_chapter = int(world.options.starting_chapter)
-    itempool += [world.create_item("Unlock CH" + str(i)) for i in range (1,6) if i != starting_chapter]
-    world.push_precollected(world.create_item("Unlock CH" + str(starting_chapter)))
-
-    # Checkpoints
     if world.options.checkpoint_sanity:
-        checkpoints: list[Item] = [
-            world.create_item("CH1 Checkpoint Basement"),
-            world.create_item("CH2 Checkpoint Lost Keys"),
-            world.create_item("CH2 Checkpoint Sammy's Office"),
-            world.create_item("CH3 Checkpoint Decisions"),
-            world.create_item("CH3 Checkpoint Angel's Bidding"),
-            world.create_item("CH3 Checkpoint Butcher Gang"),
-            world.create_item("CH4 Checkpoint Warehouse"),
-            world.create_item("CH4 Checkpoint Haunted House"),
-            world.create_item("CH5 Checkpoint Administration"),
-            world.create_item("CH5 Checkpoint The Ink Machine"),
-        ]
-        itempool += checkpoints
+        itempool += [world.create_item("CH1 Checkpoint Basement")]
 
-    # Tommy Gun
-    if (world.options.deathless_challenges == DeathlessChallenges.option_tommy_gun_only or
-            world.options.deathless_challenges == DeathlessChallenges.option_both):
-        itempool += [world.create_item("CH3 Tommy Gun")]
+    # Chapter 2 Items
+    if last_chapter >= 1:
+        itempool += [world.create_item("CH2 Keys"), world.create_item("CH2 Valve")]
+        if world.options.checkpoint_sanity:
+            itempool += [world.create_item("CH2 Checkpoint Lost Keys"), world.create_item("CH2 Checkpoint Sammy's Office")]
 
-    # Bacon Soups
-    bacon_soups_required = int(world.options.total_bacon_soups * (world.options.bacon_soups_required / 100))
-    itempool += [world.create_item("Bacon Soup") for _ in range(bacon_soups_required)]
+    # Chapter 3 Items
+    if last_chapter >= 2:
+        itempool += [world.create_item("CH3 Toys")]
+        if world.options.checkpoint_sanity:
+            itempool += [world.create_item("CH3 Checkpoint Decisions"), world.create_item("CH3 Checkpoint Angel's Bidding"), world.create_item("CH3 Checkpoint Butcher Gang")]
+        if world.options.include_tommy_gun:
+            itempool += [world.create_item("CH3 Tommy Gun")]
+
+    # Chapter 4 Items
+    if last_chapter >= 3:
+        itempool += [world.create_item("CH4 Books"), world.create_item("CH4 Bossfight Bertrum")]
+        if world.options.checkpoint_sanity:
+            itempool += [world.create_item("CH4 Checkpoint Warehouse"), world.create_item("CH4 Checkpoint Haunted House")]
+
+    # Chapter 5 Items
+    if last_chapter >= 4:
+        if world.options.checkpoint_sanity:
+            itempool += [world.create_item("CH5 Checkpoint Administration"), world.create_item("CH5 Checkpoint The Ink Machine")]
 
     # Filler Items
     number_of_items = len(itempool)

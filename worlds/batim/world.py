@@ -1,6 +1,7 @@
 from collections.abc import Mapping
 from typing import Any
 
+from rule_builder.cached_world import CachedRuleBuilderWorld
 # Imports of base Archipelago modules must be absolute.
 from worlds.AutoWorld import World
 
@@ -26,6 +27,9 @@ class BATIMWorld(World):
 
     # There is always one region that the generator starts from & assumes you can always go back to.
     # This defaults to "Menu", but you can change it by overriding origin_region_name.
+
+    def generate_early(self) -> None:
+        batim_options.resolve_option_conflicts(self)
 
 
     def create_regions(self) -> None:
@@ -55,8 +59,13 @@ class BATIMWorld(World):
         # If you need access to the player's chosen options on the client side, there is a helper for that.
         return self.options.as_dict(
             "starting_chapter",
+            "goal_chapter",
+            "include_later_chapters",
             "total_bacon_soups",
             "bacon_soups_required",
             "minigame_sanity",
             "the_meatly_sanity",
+            "checkpoint_sanity",
+            "include_tommy_gun",
+            "include_lever_challenges",
         )
