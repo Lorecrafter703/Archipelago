@@ -13,50 +13,79 @@ if TYPE_CHECKING:
 CAN_START_INK_MACHINE = HasAll("CH1 Doll", "CH1 Gear", "CH1 Wrench", "CH1 Inkwell", "CH1 Record", "CH1 Book")
 
 def set_all_rules(world: BATIMWorld) -> None:
-    # In order for AP to generate an item layout that is actually possible for the player to complete,
-    # we need to define rules for our Entrances and Locations.
-    # Note: Regions do not have rules, the Entrances connecting them do!
-    # We'll do entrances first, then locations, and then finally we set our victory condition.
-
     set_all_entrance_rules(world)
     set_all_location_rules(world)
     set_completion_condition(world)
 
 
 def set_all_entrance_rules(world: BATIMWorld) -> None:
+    last_chapter = 4 if world.options.include_later_chapters else int(world.options.goal_chapter)
+
+    # Chapter 1
     menu_to_ch1_intro = world.get_entrance("Menu to CH1 Intro")
+    menu_to_ch1_basement = world.get_entrance("Menu to CH1 Basement")
     ch1_intro_to_basement = world.get_entrance("CH1 Intro to Basement")
-    menu_to_ch2_intro = world.get_entrance("Menu to CH2 Intro")
-    ch2_intro_to_after_keys = world.get_entrance("CH2 Intro to After Keys")
-    ch2_after_keys_to_after_valve = world.get_entrance("CH2 After Keys to After Valve")
-    menu_to_ch3_intro = world.get_entrance("Menu to CH3 Intro")
-    ch3_intro_to_alice_objectives = world.get_entrance("CH3 Intro to Alice Objectives")
-    menu_to_ch4_intro = world.get_entrance("Menu to CH4 Intro")
-    ch4_intro_to_after_book_puzzle = world.get_entrance("CH4 Intro to After Book Puzzle")
-    ch4_after_book_puzzle_to_after_bertrum = world.get_entrance("CH4 After Book Puzzle to After Bertrum")
-    menu_to_ch5_intro = world.get_entrance("Menu to CH5")
 
     world.set_rule(menu_to_ch1_intro, Has("Unlock CH1"))
+    world.set_rule(menu_to_ch1_basement, Has("CH1 Checkpoint Basement"))
     world.set_rule(ch1_intro_to_basement, CAN_START_INK_MACHINE)
-    world.set_rule(menu_to_ch2_intro, Has("Unlock CH2"))
-    world.set_rule(ch2_intro_to_after_keys, Has("CH2 Keys"))
-    world.set_rule(ch2_after_keys_to_after_valve, Has("CH2 Valve"))
-    world.set_rule(menu_to_ch3_intro, Has("Unlock CH3"))
-    world.set_rule(ch3_intro_to_alice_objectives, Has("CH3 Toys"))
-    world.set_rule(menu_to_ch4_intro, Has("Unlock CH4"))
-    world.set_rule(ch4_intro_to_after_book_puzzle, Has("CH4 Books"))
-    world.set_rule(ch4_after_book_puzzle_to_after_bertrum, Has("CH4 Bossfight Bertrum"))
-    ch5_unlock_condition = Has("Bacon Soup", int(world.options.total_bacon_soups * (world.options.bacon_soups_required / 100)))
-    world.set_rule(menu_to_ch5_intro, ch5_unlock_condition)
 
-    # FIXME Special Options
-    # # Some entrance rules may only apply if the player enabled certain options.
-    # # In our case, if the hammer option is enabled, we need to add the Hammer requirement to the Entrance from
-    # # Overworld to the Top Middle Room.
-    # if world.options.hammer:
-    #     overworld_to_top_middle_room = world.get_entrance("Overworld to Top Middle Room")
-    #     can_smash_brick = Has("Hammer")
-    #     world.set_rule(overworld_to_top_middle_room, can_smash_brick)
+    # Chapter 2
+    if last_chapter >= 1:
+        menu_to_ch2_intro = world.get_entrance("Menu to CH2 Intro")
+        menu_to_ch2_after_valve = world.get_entrance("Menu to CH2 After Valve")
+        ch2_intro_to_after_keys = world.get_entrance("CH2 Intro to After Keys")
+        ch2_after_keys_to_intro = world.get_entrance("CH2 After Keys to Intro")
+        ch2_after_keys_to_after_valve = world.get_entrance("CH2 After Keys to After Valve")
+        ch2_after_valve_to_after_keys = world.get_entrance("CH2 After Valve to After Keys")
+
+        world.set_rule(menu_to_ch2_intro, Has("Unlock CH2") | Has("CH2 Checkpoint Lost Keys"))
+        world.set_rule(menu_to_ch2_after_valve, Has("CH2 Checkpoint Sammy's Office"))
+        world.set_rule(ch2_intro_to_after_keys, Has("CH2 Keys"))
+        world.set_rule(ch2_after_keys_to_after_valve, Has("CH2 Valve"))
+
+    # Chapter 3
+    if last_chapter >= 2:
+        menu_to_ch3_intro = world.get_entrance("Menu to CH3 Intro")
+        menu_to_ch3_after_toys = world.get_entrance("Menu to CH3 After Toys")
+        menu_to_ch3_alice_objectives = world.get_entrance("Menu to CH3 Alice Objectives")
+        ch3_intro_to_after_toys = world.get_entrance("CH3 Intro to After Toys")
+        ch3_after_toys_to_alice_objectives = world.get_entrance("CH3 After Toys to Alice Objectives")
+        ch3_alice_objectives_to_after_cutouts = world.get_entrance("CH3 Alice Objectives to After Cutouts")
+        ch3_after_cutouts_to_level_14 = world.get_entrance("CH3 After Cutouts to Level 14")
+
+        world.set_rule(menu_to_ch3_intro, Has("Unlock CH3"))
+        world.set_rule(menu_to_ch3_after_toys, Has("CH3 Checkpoint Angel's Bidding"))
+        world.set_rule(menu_to_ch3_alice_objectives, Has("CH3 Checkpoint Butcher Gang"))
+        world.set_rule(ch3_intro_to_after_toys, Has("CH3 Toys"))
+
+    # Chapter 4
+    if last_chapter >= 3:
+        menu_to_ch4_intro = world.get_entrance("Menu to CH4 Intro")
+        menu_to_ch4_warehouse = world.get_entrance("Menu to CH4 Warehouse")
+        menu_to_ch4_haunted_house = world.get_entrance("Menu to CH4 Haunted House")
+        ch4_intro_to_after_book_puzzle = world.get_entrance("CH4 Intro to After Book Puzzle")
+        ch4_after_book_puzzle_to_warehouse = world.get_entrance("CH4 After Book Puzzle to Warehouse")
+        ch4_warehouse_to_after_bertrum = world.get_entrance("CH4 Warehouse to After Bertrum")
+        ch4_after_bertrum_to_haunted_house = world.get_entrance("CH4 After Bertrum to Haunted House")
+
+        world.set_rule(menu_to_ch4_intro, Has("Unlock CH4"))
+        world.set_rule(menu_to_ch4_warehouse, Has("CH4 Checkpoint Warehouse"))
+        world.set_rule(menu_to_ch4_haunted_house, Has("CH4 Checkpoint Haunted House"))
+        world.set_rule(ch4_intro_to_after_book_puzzle, Has("CH4 Books"))
+        world.set_rule(ch4_warehouse_to_after_bertrum, Has("CH4 Bossfight Bertrum"))
+
+    # Chapter 5
+    if last_chapter >= 4:
+        menu_to_ch5_intro = world.get_entrance("Menu to CH5 Intro")
+        menu_to_ch5_administration = world.get_entrance("Menu to CH5 Administration")
+        ch5_intro_to_administration = world.get_entrance("CH5 Intro to Administration")
+        ch5_administration_to_boss = world.get_entrance("CH5 Administration to Boss")
+
+        world.set_rule(menu_to_ch5_intro, Has("Unlock CH5"))
+        world.set_rule(menu_to_ch5_administration, Has("CH5 Checkpoint Administration"))
+        ch5_boss_unlock_condition = Has("Bacon Soup", int(world.options.total_bacon_soups * (world.options.bacon_soups_required / 100)))
+        world.set_rule(ch5_administration_to_boss, ch5_boss_unlock_condition)
 
 
 def set_all_location_rules(world: BATIMWorld) -> None:
@@ -114,13 +143,3 @@ def set_all_location_rules(world: BATIMWorld) -> None:
 def set_completion_condition(world: BATIMWorld) -> None:
     world.set_completion_rule(Has("Victory"))
 
-
-# One final comment about rules:
-# If your world exclusively uses Rule Builder rules (like APQuest), it's worth trying CachedRuleBuilderWorld.
-# CachedRuleBuilderWorld is a subclass of World that has a bunch of caching magic to make rules faster.
-# Just have your world class subclass CachedRuleBuilderWorld instead of World:
-#   class APQuestWorld(CachedRuleBuilderWorld): ...
-# This may speed up your world, or it may make it slower.
-# The exact factors are complex and not well understood, but there is no harm in trying it.
-# Generate a few seeds and see if there is a noticeable difference!
-# If you're wondering, author has checked: APQuest is too simple to see any benefits, so we'll stick with "World".

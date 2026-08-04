@@ -5,58 +5,6 @@ from Options import Choice, OptionGroup, PerGameCommonOptions, Range, Toggle
 # For further reading on options, you can also read the Options API Document:
 # https://github.com/ArchipelagoMW/Archipelago/blob/main/docs/options%20api.md
 
-# FIXME Add Options
-# # The first type of Option we'll discuss is the Toggle.
-# # A toggle is an option that can either be on or off. This will be represented by a checkbox on the website.
-# # The default for a toggle is "off".
-# # If you want a toggle to be on by default, you can use the "DefaultOnToggle" class instead of the "Toggle" class.
-# class HardMode(Toggle):
-#     """
-#     In hard mode, the basic enemy and the final boss will have more health.
-#     The Health Upgrades become progression, as they are now required to beat the final boss.
-#     """
-#
-#     # The docstring of an option is used as the description on the website and in the template yaml.
-#
-#     # You'll also want to set a display name, which will determine what the option is called on the website.
-#     display_name = "Hard Mode"
-#
-#
-# # A Range is a numeric option with a min and max value. This will be represented by a slider on the website.
-# class ConfettiExplosiveness(Range):
-#     """
-#     How much confetti each use of a confetti cannon will fire.
-#     """
-#
-#     display_name = "Confetti Explosiveness"
-#
-#     range_start = 0
-#     range_end = 10
-#
-#     # Range options must define an explicit default value.
-#     default = 3
-#
-#
-# # A Choice is an option with multiple discrete choices. This will be represented by a dropdown on the website.
-# class PlayerSprite(Choice):
-#     """
-#     The sprite that the player will have.
-#     """
-#
-#     display_name = "Player Sprite"
-#
-#     option_human = 0
-#     option_duck = 1
-#     option_horse = 2
-#     option_cat = 3
-#
-#     # Choice options must define an explicit default value.
-#     default = option_human
-#
-#     # For choices, you can also define aliases.
-#     # For example, we could make it so "player_sprite: kitty" resolves to "player_sprite: cat" like this:
-#     alias_kitty = option_cat
-
 class StartingChapter(Choice):
     """
     The first chapter you will have unlocked.
@@ -66,12 +14,26 @@ class StartingChapter(Choice):
     option_two = 1
     option_three = 2
     option_four = 3
+    option_five = 4
     default = option_one
+
+
+class GoalChapter(Choice):
+    """
+    The chapter to be used as a goal.
+    """
+    display_name = "Goal Chapter"
+    option_one = 0
+    option_two = 1
+    option_three = 2
+    option_four = 3
+    option_five = 4
+    default = option_five
 
 
 class TotalBaconSoups(Range):
     """
-    The total number of Bacon Soups included in the world
+    The total number of Bacon Soups included in the world.
     """
     display_name = "Total Bacon Soups"
     range_start = 0
@@ -81,7 +43,7 @@ class TotalBaconSoups(Range):
 
 class BaconSoupsRequired(Range):
     """
-    What percentage of the total Bacon Soups will be required to begin Chapter 5
+    What percentage of the total Bacon Soups will be required to begin Chapter 5.
     """
     display_name = "Bacon Soups Required"
     range_start = 0
@@ -89,62 +51,150 @@ class BaconSoupsRequired(Range):
     default = 75
 
 
+class IncludeLaterChapters(Toggle):
+    """
+    If this option is disabled, chapters after the goal chapter
+    will not be included in the randomization.
+    """
+    display_name = "Include Later Chapters"
+
+
 class MinigameSanity(Toggle):
     """
-    Getting perfect scores on the three minigames in the Storage 9 warehouse sends checks
+    Getting perfect scores on the three minigames in the Storage 9 warehouse sends checks.
     """
     display_name = "Minigame Sanity"
 
 
 class TheMeatlySanity(Toggle):
     """
-    Finding hidden theMeatly cutouts sends checks
+    Finding hidden theMeatly cutouts sends checks.
     """
     display_name = "theMeatly Sanity"
 
 
-# We must now define a dataclass inheriting from PerGameCommonOptions that we put all our options in.
-# This is in the format "option_name_in_snake_case: OptionClassName".
+class CheckpointSanity(Toggle):
+    """
+    Randomizes Checkpoints into the item pool. Reaching the areas that would typically unlock checkpoints instead will send a check.
+    """
+    display_name = "Checkpoint Sanity"
+
+
+class IncludeTommyGun(Toggle):
+    """
+    When this option is enabled, completing the steps to obtain the Tommy Gun will send a check. The tommy gun will not
+    be obtainable however, unless the CH3 Tommy Gun item has been received, at which point the Tommy Gun will become
+    permanently obtainable, regardless of other factors.
+    """
+    display_name = "IncludeTommyGun"
+
+
+class IncludeLeverChallenges(Toggle):
+    """
+    Completing each of the three Lever challenges will send a check. Lever challenges are accessed as usual, by choosing
+    the Angel Path, setting the ink to Boris, and completing Angel's tasks up until defeating the Butcher gang without
+    dying. These conditions are initially satisfied upon loading into any checkpoint after the path decision point.
+    """
+    display_name = "IncludeLeverChallenges"
+
+
 @dataclass
 class BATIMOptions(PerGameCommonOptions):
     starting_chapter: StartingChapter
+    goal_chapter: GoalChapter
+    include_later_chapters: IncludeLaterChapters
     total_bacon_soups: TotalBaconSoups
     bacon_soups_required: BaconSoupsRequired
     minigame_sanity: MinigameSanity
     the_meatly_sanity: TheMeatlySanity
+    checkpoint_sanity: CheckpointSanity
+    include_tommy_gun: IncludeTommyGun
+    include_lever_challenges: IncludeLeverChallenges
 
 
-# If we want to group our options by similar type, we can do so as well. This looks nice on the website.
 option_groups = [
     OptionGroup(
         "Basic Configurations",
-        [StartingChapter, TotalBaconSoups, BaconSoupsRequired],
+        [StartingChapter, GoalChapter, IncludeLaterChapters, TotalBaconSoups, BaconSoupsRequired],
     ),
     OptionGroup(
         "Sanity Options",
-        [MinigameSanity, TheMeatlySanity],
+        [MinigameSanity, TheMeatlySanity, CheckpointSanity, IncludeTommyGun, IncludeLeverChallenges],
     ),
 ]
 
-# FIXME Presets
-# # Finally, we can define some option presets if we want the player to be able to quickly choose a specific "mode".
-# option_presets = {
-#     "boring": {
-#         "hard_mode": False,
-#         "hammer": False,
-#         "extra_starting_chest": False,
-#         "start_with_one_confetti_cannon": False,
-#         "trap_chance": 0,
-#         "confetti_explosiveness": ConfettiExplosiveness.range_start,
-#         "player_sprite": PlayerSprite.option_human,
-#     },
-#     "the true way to play": {
-#         "hard_mode": True,
-#         "hammer": True,
-#         "extra_starting_chest": True,
-#         "start_with_one_confetti_cannon": True,
-#         "trap_chance": 50,
-#         "confetti_explosiveness": ConfettiExplosiveness.range_end,
-#         "player_sprite": PlayerSprite.option_duck,
-#     },
-# }
+option_presets = {
+    "default": {
+        "starting_chapter": StartingChapter.default,
+        "goal_chapter": GoalChapter.default,
+        "include_later_chapters": False,
+        "total_bacon_soups": 40,
+        "bacon_soups_required": 75,
+        "minigame_sanity": False,
+        "the_meatly_sanity": False,
+        "checkpoint_sanity": False,
+        "include_tommy_gun": False,
+        "include_lever_challenges": False,
+    },
+    "insanity": {
+        "starting_chapter": "random",
+        "goal_chapter": "random",
+        "include_later_chapters": True,
+        "total_bacon_soups": 117,
+        "bacon_soups_required": 100,
+        "minigame_sanity": True,
+        "the_meatly_sanity": True,
+        "checkpoint_sanity": True,
+        "include_tommy_gun": False,
+        "include_lever_challenges": True,
+    },
+    "bk simulator": {
+        "starting_chapter": StartingChapter.option_four,
+        "goal_chapter": GoalChapter.default,
+        "include_later_chapters": True,
+        "total_bacon_soups": 117,
+        "bacon_soups_required": 100,
+        "minigame_sanity": True,
+        "the_meatly_sanity": True,
+        "checkpoint_sanity": True,
+        "include_tommy_gun": True,
+        "include_lever_challenges": True,
+    },
+    "all random": {
+        "starting_chapter": "random",
+        "goal_chapter": "random",
+        "include_later_chapters": "random",
+        "total_bacon_soups": "random",
+        "bacon_soups_required": "random",
+        "minigame_sanity": "random",
+        "the_meatly_sanity": "random",
+        "checkpoint_sanity": "random",
+        "include_tommy_gun": "random",
+        "include_lever_challenges": "random",
+    },
+    "speedrun": {
+        "starting_chapter": StartingChapter.option_one,
+        "goal_chapter": GoalChapter.option_one,
+        "include_later_chapters": False,
+        "total_bacon_soups": 117,
+        "bacon_soups_required": 1,
+        "minigame_sanity": False,
+        "the_meatly_sanity": False,
+        "checkpoint_sanity": True,
+        "include_tommy_gun": False,
+        "include_lever_challenges": False,
+    }
+}
+
+
+def resolve_option_conflicts(world) -> None:
+    # Correct Yaml Options
+    starting_chapter = int(world.options.starting_chapter)
+    bacon_soups_total = int(world.options.total_bacon_soups)
+    cumulative_bacon_soups = [21, 52, 91, 110, 117]
+    if not world.options.include_later_chapters:
+        last_chapter = int(world.options.goal_chapter)
+        starting_chapter = 0 if starting_chapter > last_chapter else starting_chapter
+        world.options.starting_chapter = StartingChapter(starting_chapter)
+        bacon_soups_total = min(bacon_soups_total, cumulative_bacon_soups[last_chapter])
+        world.options.total_bacon_soups = TotalBaconSoups(bacon_soups_total)

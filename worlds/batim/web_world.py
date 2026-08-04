@@ -2,7 +2,7 @@ from BaseClasses import Tutorial
 from worlds.AutoWorld import WebWorld
 
 # FIXME Add option_presets
-from .options import option_groups#, option_presets
+from .options import option_groups, option_presets
 
 
 class BATIMWebWorld(WebWorld):
@@ -22,6 +22,5 @@ class BATIMWebWorld(WebWorld):
 
     tutorials = [setup_en]
 
-    # FIXME ADD option presets
     option_groups = option_groups
-    #options_presets = option_presets
+    options_presets = option_presets
