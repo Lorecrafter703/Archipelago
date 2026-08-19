@@ -33,6 +33,7 @@ ITEM_NAME_TO_ID = {
     "CH3 Checkpoint Angel's Bidding": 303,
     "CH3 Checkpoint Butcher Gang": 304,
     "CH3 Tommy Gun": 305,
+    "CH3 Boris Bone": 306,
     "Unlock CH4": 400,
     "CH4 Books": 401,
     "CH4 Bossfight Bertrum": 402,
@@ -72,6 +73,7 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "CH5 Checkpoint Administration": ItemClassification.useful,
     "CH5 Checkpoint The Ink Machine": ItemClassification.useful,
     "CH3 Tommy Gun": ItemClassification.useful,
+    "CH3 Boris Bone": ItemClassification.filler,
     "Empty Soup Can": ItemClassification.filler,
     "Empty Ink Well": ItemClassification.filler,
     "Broken Banjo String": ItemClassification.filler,
@@ -140,6 +142,8 @@ def create_all_items(world: BATIMWorld) -> None:
             itempool += [world.create_item("CH3 Checkpoint Decisions"), world.create_item("CH3 Checkpoint Angel's Bidding"), world.create_item("CH3 Checkpoint Butcher Gang")]
         if world.options.include_tommy_gun:
             itempool += [world.create_item("CH3 Tommy Gun")]
+        if world.options.boris_bone:
+            itempool += [world.create_item("CH3 Boris Bone")]
 
     # Chapter 4 Items
     if last_chapter >= 3:

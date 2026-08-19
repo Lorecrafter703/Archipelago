@@ -141,5 +141,9 @@ def set_all_location_rules(world: BATIMWorld) -> None:
 
 
 def set_completion_condition(world: BATIMWorld) -> None:
-    world.set_completion_rule(Has("Victory"))
+    goal = Has("Victory")
+    if world.options.require_previous_chapters:
+        for _ in range(world.options.goal_chapter + 1):
+            goal = goal | Has(f"Chapter {_ + 1} Complete")
+    world.set_completion_rule(goal)
 

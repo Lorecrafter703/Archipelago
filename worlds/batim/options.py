@@ -59,6 +59,14 @@ class IncludeLaterChapters(Toggle):
     display_name = "Include Later Chapters"
 
 
+class RequirePreviousChapters(Toggle):
+    """
+    If this option is enable, all chapters before the goal chapter must be completed before the goal chapter to trigger
+    the completion condition.
+    """
+    display_name = "Require Previous Chapters"
+
+
 class MinigameSanity(Toggle):
     """
     Getting perfect scores on the three minigames in the Storage 9 warehouse sends checks.
@@ -86,7 +94,7 @@ class IncludeTommyGun(Toggle):
     be obtainable however, unless the CH3 Tommy Gun item has been received, at which point the Tommy Gun will become
     permanently obtainable, regardless of other factors.
     """
-    display_name = "IncludeTommyGun"
+    display_name = "Include Tommy Gun"
 
 
 class IncludeLeverChallenges(Toggle):
@@ -95,7 +103,21 @@ class IncludeLeverChallenges(Toggle):
     the Angel Path, setting the ink to Boris, and completing Angel's tasks up until defeating the Butcher gang without
     dying. These conditions are initially satisfied upon loading into any checkpoint after the path decision point.
     """
-    display_name = "IncludeLeverChallenges"
+    display_name = "Include Lever Challenges"
+
+
+class BorisBone(Toggle):
+    """
+    Include Boris's bone from chapter 3 in generation.
+    """
+    display_name = "Boris Bone"
+
+
+class DeathLink(Toggle):
+    """
+    Enables Deathlink. Can be toggled from the client.
+    """
+    display_name = "Deathlink"
 
 
 @dataclass
@@ -103,6 +125,7 @@ class BATIMOptions(PerGameCommonOptions):
     starting_chapter: StartingChapter
     goal_chapter: GoalChapter
     include_later_chapters: IncludeLaterChapters
+    require_previous_chapters: RequirePreviousChapters
     total_bacon_soups: TotalBaconSoups
     bacon_soups_required: BaconSoupsRequired
     minigame_sanity: MinigameSanity
@@ -110,16 +133,18 @@ class BATIMOptions(PerGameCommonOptions):
     checkpoint_sanity: CheckpointSanity
     include_tommy_gun: IncludeTommyGun
     include_lever_challenges: IncludeLeverChallenges
+    boris_bone: BorisBone
+    death_link: DeathLink
 
 
 option_groups = [
     OptionGroup(
         "Basic Configurations",
-        [StartingChapter, GoalChapter, IncludeLaterChapters, TotalBaconSoups, BaconSoupsRequired],
+        [StartingChapter, GoalChapter, IncludeLaterChapters, RequirePreviousChapters, TotalBaconSoups, BaconSoupsRequired, DeathLink],
     ),
     OptionGroup(
         "Sanity Options",
-        [MinigameSanity, TheMeatlySanity, CheckpointSanity, IncludeTommyGun, IncludeLeverChallenges],
+        [MinigameSanity, TheMeatlySanity, CheckpointSanity, IncludeTommyGun, IncludeLeverChallenges, BorisBone],
     ),
 ]
 
@@ -128,61 +153,76 @@ option_presets = {
         "starting_chapter": StartingChapter.default,
         "goal_chapter": GoalChapter.default,
         "include_later_chapters": False,
+        "require_previous_chapters": False,
         "total_bacon_soups": 40,
         "bacon_soups_required": 75,
+        "death_link": False,
         "minigame_sanity": False,
         "the_meatly_sanity": False,
         "checkpoint_sanity": False,
         "include_tommy_gun": False,
         "include_lever_challenges": False,
+        "boris_bone": False,
     },
     "insanity": {
         "starting_chapter": "random",
         "goal_chapter": "random",
         "include_later_chapters": True,
+        "require_previous_chapters": True,
         "total_bacon_soups": 117,
         "bacon_soups_required": 100,
+        "death_link": True,
         "minigame_sanity": True,
         "the_meatly_sanity": True,
         "checkpoint_sanity": True,
         "include_tommy_gun": False,
         "include_lever_challenges": True,
+        "boris_bone": True,
     },
     "bk simulator": {
         "starting_chapter": StartingChapter.option_four,
         "goal_chapter": GoalChapter.default,
         "include_later_chapters": True,
+        "require_previous_chapters": True,
         "total_bacon_soups": 117,
         "bacon_soups_required": 100,
+        "death_link": True,
         "minigame_sanity": True,
         "the_meatly_sanity": True,
         "checkpoint_sanity": True,
         "include_tommy_gun": True,
         "include_lever_challenges": True,
+        "boris_bone": True,
     },
     "all random": {
         "starting_chapter": "random",
         "goal_chapter": "random",
         "include_later_chapters": "random",
+        "require_previous_chapters": "random",
         "total_bacon_soups": "random",
         "bacon_soups_required": "random",
+        "death_link": "random",
         "minigame_sanity": "random",
         "the_meatly_sanity": "random",
         "checkpoint_sanity": "random",
         "include_tommy_gun": "random",
         "include_lever_challenges": "random",
+        "boris_bone": "random",
     },
     "speedrun": {
         "starting_chapter": StartingChapter.option_one,
         "goal_chapter": GoalChapter.option_one,
         "include_later_chapters": False,
+        "require_previous_chapters": False,
         "total_bacon_soups": 117,
         "bacon_soups_required": 1,
+        "death_link": False,
         "minigame_sanity": False,
         "the_meatly_sanity": False,
         "checkpoint_sanity": True,
         "include_tommy_gun": False,
         "include_lever_challenges": False,
+        "boris_bone": False,
     }
 }
 

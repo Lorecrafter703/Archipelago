@@ -147,6 +147,7 @@ LOCATION_NAME_TO_ID = {
     "CH3 Lever Challenge 1": 355,
     "CH3 Lever Challenge 2": 356,
     "CH3 Lever Challenge 3": 357,
+    "CH3 Boris Bone": 358,
     "CH3 Complete": 399,
     "CH4 Bacon Soup 0": 400,
     "CH4 Bacon Soup 1": 401,
@@ -264,12 +265,12 @@ def create_regular_locations(world: BATIMWorld) -> None:
     ch1_basement.add_locations(ch1_basement_locations, BATIMLocation)
 
     if world.options.the_meatly_sanity:
-        ch1_intro.add_locations(
+        ch1_basement.add_locations(
             get_location_names_with_ids(["CH1 theMeatly"]),
             BATIMLocation
         )
     if world.options.checkpoint_sanity:
-        ch1_intro.add_locations(
+        ch1_basement.add_locations(
             get_location_names_with_ids(["CH1 Checkpoint Basement"]),
             BATIMLocation
         )
@@ -441,6 +442,11 @@ def create_regular_locations(world: BATIMWorld) -> None:
                 get_location_names_with_ids(["CH3 Checkpoint Butcher Gang"]),
                 BATIMLocation
             )
+        if world.options.boris_bone:
+            ch3_intro.add_locations(
+                get_location_names_with_ids(["CH3 Boris Bone"]),
+                BATIMLocation
+            )
 
     if last_chapter >= 3:
         ch4_intro = world.get_region("CH4 Intro")
@@ -589,6 +595,46 @@ def create_events(world: BATIMWorld) -> None:
     last_region.add_event(
         "Goal Chapter Complete",
         "Victory",
+        location_type=BATIMLocation,
+        item_type=items.BATIMItem
+    )
+
+    ch1_basement = world.get_region("CH1 Basement")
+    ch1_basement.add_event(
+        "Chapter 1 Complete",
+        "Chapter 1 Complete",
+        location_type=BATIMLocation,
+        item_type=items.BATIMItem
+    )
+
+    ch2_after_valve = world.get_region("CH2 After Valve")
+    ch2_after_valve.add_event(
+        "Chapter 2 Complete",
+        "Chapter 2 Complete",
+        location_type=BATIMLocation,
+        item_type=items.BATIMItem
+    )
+
+    ch3_level_14 = world.get_region("CH3 Level 14")
+    ch3_level_14.add_event(
+        "Chapter 3 Complete",
+        "Chapter 3 Complete",
+        location_type=BATIMLocation,
+        item_type=items.BATIMItem
+    )
+
+    ch4_haunted_house = world.get_region("CH4 Haunted House")
+    ch4_haunted_house.add_event(
+        "Chapter 4 Complete",
+        "Chapter 4 Complete",
+        location_type=BATIMLocation,
+        item_type=items.BATIMItem
+    )
+
+    ch5_boss = world.get_region("CH5 Boss")
+    ch5_boss.add_event(
+        "Chapter 5 Complete",
+        "Chapter 5 Complete",
         location_type=BATIMLocation,
         item_type=items.BATIMItem
     )
