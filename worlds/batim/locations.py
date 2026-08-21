@@ -270,7 +270,8 @@ def create_regular_locations(world: BATIMWorld) -> None:
             BATIMLocation
         )
     if world.options.checkpoint_sanity:
-        ch1_basement.add_locations(
+        ch1_checkpoint = world.get_region("CH1 Checkpoint")
+        ch1_checkpoint.add_locations(
             get_location_names_with_ids(["CH1 Checkpoint Basement"]),
             BATIMLocation
         )

@@ -19,6 +19,7 @@ def create_all_regions(world: BATIMWorld) -> None:
     menu = Region("Menu", world.player, world.multiworld)
     # CH1 Locations
     ch1_intro = Region("CH1 Intro", world.player, world.multiworld)
+    ch1_checkpoint = Region("CH1 Checkpoint", world.player, world.multiworld)
     ch1_basement = Region("CH1 Basement", world.player, world.multiworld)
     # CH2 Locations
     ch2_intro = Region("CH2 Intro", world.player, world.multiworld)
@@ -44,6 +45,7 @@ def create_all_regions(world: BATIMWorld) -> None:
     regions = [
         menu,
         ch1_intro,
+        ch1_checkpoint,
         ch1_basement,
     ]
     if last_chapter >= 1:
@@ -85,11 +87,13 @@ def connect_regions(world: BATIMWorld) -> None:
 
     # Chapter 1
     ch1_intro = world.get_region("CH1 Intro")
+    ch1_checkpoint = world.get_region("CH1 Checkpoint")
     ch1_basement = world.get_region("CH1 Basement")
 
     menu.connect(ch1_intro, "Menu to CH1 Intro")
     menu.connect(ch1_basement, "Menu to CH1 Basement")
-    ch1_intro.connect(ch1_basement, "CH1 Intro to Basement")
+    ch1_intro.connect(ch1_checkpoint, "CH1 Intro to Checkpoint")
+    ch1_checkpoint.connect(ch1_basement, "CH1 Checkpoint to Basement")
 
     # Chapter 2
     if last_chapter >= 1:

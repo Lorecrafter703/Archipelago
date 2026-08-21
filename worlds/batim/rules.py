@@ -24,11 +24,11 @@ def set_all_entrance_rules(world: BATIMWorld) -> None:
     # Chapter 1
     menu_to_ch1_intro = world.get_entrance("Menu to CH1 Intro")
     menu_to_ch1_basement = world.get_entrance("Menu to CH1 Basement")
-    ch1_intro_to_basement = world.get_entrance("CH1 Intro to Basement")
+    ch1_intro_to_checkpoint = world.get_entrance("CH1 Intro to Checkpoint")
 
     world.set_rule(menu_to_ch1_intro, Has("Unlock CH1"))
     world.set_rule(menu_to_ch1_basement, Has("CH1 Checkpoint Basement"))
-    world.set_rule(ch1_intro_to_basement, CAN_START_INK_MACHINE)
+    world.set_rule(ch1_intro_to_checkpoint, CAN_START_INK_MACHINE)
 
     # Chapter 2
     if last_chapter >= 1:
