@@ -10,7 +10,7 @@ from .options import BATIMOptions
 if TYPE_CHECKING:
     from .world import BATIMWorld
 
-CAN_START_INK_MACHINE = HasAll("CH1 Doll", "CH1 Gear", "CH1 Wrench", "CH1 Inkwell", "CH1 Record", "CH1 Book")
+CAN_START_INK_MACHINE = HasAll("Bendy Squeaky Toy", "Spare Gear", "'Pocket' Wrench", "Animators' Inkwell", "Vinyl Record", "The Illusion of Living")
 
 def set_all_rules(world: BATIMWorld) -> None:
     set_all_entrance_rules(world)
@@ -27,7 +27,7 @@ def set_all_entrance_rules(world: BATIMWorld) -> None:
     ch1_intro_to_checkpoint = world.get_entrance("CH1 Intro to Checkpoint")
 
     world.set_rule(menu_to_ch1_intro, Has("Unlock CH1"))
-    world.set_rule(menu_to_ch1_basement, Has("CH1 Checkpoint Basement"))
+    world.set_rule(menu_to_ch1_basement, Has("CH1 Checkpoint - Bendy Chase"))
     world.set_rule(ch1_intro_to_checkpoint, CAN_START_INK_MACHINE)
 
     # Chapter 2
@@ -39,10 +39,10 @@ def set_all_entrance_rules(world: BATIMWorld) -> None:
         ch2_after_keys_to_after_valve = world.get_entrance("CH2 After Keys to After Valve")
         ch2_after_valve_to_after_keys = world.get_entrance("CH2 After Valve to After Keys")
 
-        world.set_rule(menu_to_ch2_intro, Has("Unlock CH2") | Has("CH2 Checkpoint Lost Keys"))
-        world.set_rule(menu_to_ch2_after_valve, Has("CH2 Checkpoint Sammy's Office"))
-        world.set_rule(ch2_intro_to_after_keys, Has("CH2 Keys"))
-        world.set_rule(ch2_after_keys_to_after_valve, Has("CH2 Valve"))
+        world.set_rule(menu_to_ch2_intro, Has("Unlock CH2") | Has("CH2 Checkpoint - Lost Keys"))
+        world.set_rule(menu_to_ch2_after_valve, Has("CH2 Checkpoint - Sammy's Office"))
+        world.set_rule(ch2_intro_to_after_keys, Has("Wally's Keys"))
+        world.set_rule(ch2_after_keys_to_after_valve, Has("Sewer Valve"))
 
     # Chapter 3
     if last_chapter >= 2:
@@ -55,9 +55,9 @@ def set_all_entrance_rules(world: BATIMWorld) -> None:
         ch3_after_cutouts_to_level_14 = world.get_entrance("CH3 After Cutouts to Level 14")
 
         world.set_rule(menu_to_ch3_intro, Has("Unlock CH3"))
-        world.set_rule(menu_to_ch3_after_toys, Has("CH3 Checkpoint Angel's Bidding"))
-        world.set_rule(menu_to_ch3_alice_objectives, Has("CH3 Checkpoint Butcher Gang"))
-        world.set_rule(ch3_intro_to_after_toys, Has("CH3 Toys"))
+        world.set_rule(menu_to_ch3_after_toys, Has("CH3 Checkpoint - Angel's Bidding"))
+        world.set_rule(menu_to_ch3_alice_objectives, Has("CH3 Checkpoint - Butcher Gang"))
+        world.set_rule(ch3_intro_to_after_toys, Has("Toy Machine"))
 
     # Chapter 4
     if last_chapter >= 3:
@@ -70,10 +70,10 @@ def set_all_entrance_rules(world: BATIMWorld) -> None:
         ch4_after_bertrum_to_haunted_house = world.get_entrance("CH4 After Bertrum to Haunted House")
 
         world.set_rule(menu_to_ch4_intro, Has("Unlock CH4"))
-        world.set_rule(menu_to_ch4_warehouse, Has("CH4 Checkpoint Warehouse"))
-        world.set_rule(menu_to_ch4_haunted_house, Has("CH4 Checkpoint Haunted House"))
-        world.set_rule(ch4_intro_to_after_book_puzzle, Has("CH4 Books"))
-        world.set_rule(ch4_warehouse_to_after_bertrum, Has("CH4 Bossfight Bertrum"))
+        world.set_rule(menu_to_ch4_warehouse, Has("CH4 Checkpoint - Warehouse"))
+        world.set_rule(menu_to_ch4_haunted_house, Has("CH4 Checkpoint - Brute Boris"))
+        world.set_rule(ch4_intro_to_after_book_puzzle, Has("Book Puzzle"))
+        world.set_rule(ch4_warehouse_to_after_bertrum, Has("Bertrum Bossfight"))
 
     # Chapter 5
     if last_chapter >= 4:
@@ -83,7 +83,7 @@ def set_all_entrance_rules(world: BATIMWorld) -> None:
         ch5_administration_to_boss = world.get_entrance("CH5 Administration to Boss")
 
         world.set_rule(menu_to_ch5_intro, Has("Unlock CH5"))
-        world.set_rule(menu_to_ch5_administration, Has("CH5 Checkpoint Administration"))
+        world.set_rule(menu_to_ch5_administration, Has("CH5 Checkpoint - Administration"))
         ch5_boss_unlock_condition = Has("Bacon Soup", int(world.options.total_bacon_soups * (world.options.bacon_soups_required / 100)))
         world.set_rule(ch5_administration_to_boss, ch5_boss_unlock_condition)
 

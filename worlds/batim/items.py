@@ -15,65 +15,65 @@ ITEM_NAME_TO_ID = {
     "Empty Ink Well": 4,
     "Broken Banjo String": 5,
     "Unlock CH1": 100,
-    "CH1 Book": 101,
-    "CH1 Doll": 102,
-    "CH1 Gear": 103,
-    "CH1 Inkwell": 104,
-    "CH1 Record": 105,
-    "CH1 Wrench": 106,
-    "CH1 Checkpoint Basement": 107,
+    "The Illusion of Living": 101,
+    "Bendy Squeaky Toy": 102,
+    "Spare Gear": 103,
+    "Animators' Inkwell": 104,
+    "Vinyl Record": 105,
+    "'Pocket' Wrench": 106,
+    "CH1 Checkpoint - Bendy Chase": 107,
     "Unlock CH2": 200,
-    "CH2 Keys": 201,
-    "CH2 Valve": 202,
-    "CH2 Checkpoint Lost Keys": 203,
-    "CH2 Checkpoint Sammy's Office": 204,
+    "Wally's Keys": 201,
+    "Sewer Valve": 202,
+    "CH2 Checkpoint - Lost Keys": 203,
+    "CH2 Checkpoint - Sammy's Office": 204,
     "Unlock CH3": 300,
-    "CH3 Toys": 301,
-    "CH3 Checkpoint Decisions": 302,
-    "CH3 Checkpoint Angel's Bidding": 303,
-    "CH3 Checkpoint Butcher Gang": 304,
-    "CH3 Tommy Gun": 305,
-    "CH3 Boris Bone": 306,
+    "Toy Machine": 301,
+    "CH3 Checkpoint - Toy Machine": 302,
+    "CH3 Checkpoint - Angel's Bidding": 303,
+    "CH3 Checkpoint - Butcher Gang": 304,
+    "Tommy Gun": 305,
+    "Poor Dog's Bone": 306,
     "Unlock CH4": 400,
-    "CH4 Books": 401,
-    "CH4 Bossfight Bertrum": 402,
-    "CH4 Checkpoint Warehouse": 403,
-    "CH4 Checkpoint Haunted House": 404,
+    "Book Puzzle": 401,
+    "Bertrum Bossfight": 402,
+    "CH4 Checkpoint - Warehouse": 403,
+    "CH4 Checkpoint - Brute Boris": 404,
     "Unlock CH5": 500,
-    "CH5 Checkpoint Administration": 501,
-    "CH5 Checkpoint The Ink Machine": 502,
+    "CH5 Checkpoint - Administration": 501,
+    "CH5 Checkpoint - The Ink Machine": 502,
 }
 
 DEFAULT_ITEM_CLASSIFICATIONS = {
-    "CH1 Doll": ItemClassification.progression,
-    "CH1 Gear": ItemClassification.progression,
-    "CH1 Wrench": ItemClassification.progression,
-    "CH1 Record": ItemClassification.progression,
-    "CH1 Inkwell": ItemClassification.progression,
-    "CH1 Book": ItemClassification.progression,
-    "CH2 Keys": ItemClassification.progression,
-    "CH2 Valve": ItemClassification.progression,
-    "CH3 Toys": ItemClassification.progression,
-    "CH4 Books": ItemClassification.progression,
-    "CH4 Bossfight Bertrum": ItemClassification.progression,
+    "Bendy Squeaky Toy": ItemClassification.progression,
+    "Spare Gear": ItemClassification.progression,
+    "'Pocket' Wrench": ItemClassification.progression,
+    "Vinyl Record": ItemClassification.progression,
+    "Animators' Inkwell": ItemClassification.progression,
+    "The Illusion of Living": ItemClassification.progression,
+    "Wally's Keys": ItemClassification.progression,
+    "Sewer Valve": ItemClassification.progression,
+    "Toy Machine": ItemClassification.progression,
+    "Book Puzzle": ItemClassification.progression,
+    "Bertrum Bossfight": ItemClassification.progression,
     "Unlock CH1": ItemClassification.progression,
     "Unlock CH2": ItemClassification.progression,
     "Unlock CH3": ItemClassification.progression,
     "Unlock CH4": ItemClassification.progression,
     "Unlock CH5": ItemClassification.progression,
     "Bacon Soup": ItemClassification.progression,
-    "CH1 Checkpoint Basement": ItemClassification.useful,
-    "CH2 Checkpoint Lost Keys": ItemClassification.useful,
-    "CH2 Checkpoint Sammy's Office": ItemClassification.useful,
-    "CH3 Checkpoint Decisions": ItemClassification.useful,
-    "CH3 Checkpoint Angel's Bidding": ItemClassification.useful,
-    "CH3 Checkpoint Butcher Gang": ItemClassification.useful,
-    "CH4 Checkpoint Warehouse": ItemClassification.useful,
-    "CH4 Checkpoint Haunted House": ItemClassification.useful,
-    "CH5 Checkpoint Administration": ItemClassification.useful,
-    "CH5 Checkpoint The Ink Machine": ItemClassification.useful,
-    "CH3 Tommy Gun": ItemClassification.useful,
-    "CH3 Boris Bone": ItemClassification.filler,
+    "CH1 Checkpoint - Bendy Chase": ItemClassification.useful,
+    "CH2 Checkpoint - Lost Keys": ItemClassification.useful,
+    "CH2 Checkpoint - Sammy's Office": ItemClassification.useful,
+    "CH3 Checkpoint - Toy Machine": ItemClassification.useful,
+    "CH3 Checkpoint - Angel's Bidding": ItemClassification.useful,
+    "CH3 Checkpoint - Butcher Gang": ItemClassification.useful,
+    "CH4 Checkpoint - Warehouse": ItemClassification.useful,
+    "CH4 Checkpoint - Brute Boris": ItemClassification.useful,
+    "CH5 Checkpoint - Administration": ItemClassification.useful,
+    "CH5 Checkpoint - The Ink Machine": ItemClassification.useful,
+    "Tommy Gun": ItemClassification.useful,
+    "Poor Dog's Bone": ItemClassification.filler,
     "Empty Soup Can": ItemClassification.filler,
     "Empty Ink Well": ItemClassification.filler,
     "Broken Banjo String": ItemClassification.filler,
@@ -119,42 +119,42 @@ def create_all_items(world: BATIMWorld) -> None:
 
     # Chapter 1 Items
     itempool += [
-        world.create_item("CH1 Doll"),
-        world.create_item("CH1 Gear"),
-        world.create_item("CH1 Wrench"),
-        world.create_item("CH1 Record"),
-        world.create_item("CH1 Inkwell"),
-        world.create_item("CH1 Book"),
+        world.create_item("Bendy Squeaky Toy"),
+        world.create_item("Spare Gear"),
+        world.create_item("'Pocket' Wrench"),
+        world.create_item("Vinyl Record"),
+        world.create_item("Animators' Inkwell"),
+        world.create_item("The Illusion of Living"),
     ]
     if world.options.checkpoint_sanity:
-        itempool += [world.create_item("CH1 Checkpoint Basement")]
+        itempool += [world.create_item("CH1 Checkpoint - Bendy Chase")]
 
     # Chapter 2 Items
     if last_chapter >= 1:
-        itempool += [world.create_item("CH2 Keys"), world.create_item("CH2 Valve")]
+        itempool += [world.create_item("Wally's Keys"), world.create_item("Sewer Valve")]
         if world.options.checkpoint_sanity:
-            itempool += [world.create_item("CH2 Checkpoint Lost Keys"), world.create_item("CH2 Checkpoint Sammy's Office")]
+            itempool += [world.create_item("CH2 Checkpoint - Lost Keys"), world.create_item("CH2 Checkpoint - Sammy's Office")]
 
     # Chapter 3 Items
     if last_chapter >= 2:
-        itempool += [world.create_item("CH3 Toys")]
+        itempool += [world.create_item("Toy Machine")]
         if world.options.checkpoint_sanity:
-            itempool += [world.create_item("CH3 Checkpoint Decisions"), world.create_item("CH3 Checkpoint Angel's Bidding"), world.create_item("CH3 Checkpoint Butcher Gang")]
+            itempool += [world.create_item("CH3 Checkpoint - Toy Machine"), world.create_item("CH3 Checkpoint - Angel's Bidding"), world.create_item("CH3 Checkpoint - Butcher Gang")]
         if world.options.include_tommy_gun:
-            itempool += [world.create_item("CH3 Tommy Gun")]
+            itempool += [world.create_item("Tommy Gun")]
         if world.options.boris_bone:
-            itempool += [world.create_item("CH3 Boris Bone")]
+            itempool += [world.create_item("Poor Dog's Bone")]
 
     # Chapter 4 Items
     if last_chapter >= 3:
-        itempool += [world.create_item("CH4 Books"), world.create_item("CH4 Bossfight Bertrum")]
+        itempool += [world.create_item("Book Puzzle"), world.create_item("Bertrum Bossfight")]
         if world.options.checkpoint_sanity:
-            itempool += [world.create_item("CH4 Checkpoint Warehouse"), world.create_item("CH4 Checkpoint Haunted House")]
+            itempool += [world.create_item("CH4 Checkpoint - Warehouse"), world.create_item("CH4 Checkpoint - Brute Boris")]
 
     # Chapter 5 Items
     if last_chapter >= 4:
         if world.options.checkpoint_sanity:
-            itempool += [world.create_item("CH5 Checkpoint Administration"), world.create_item("CH5 Checkpoint The Ink Machine")]
+            itempool += [world.create_item("CH5 Checkpoint - Administration"), world.create_item("CH5 Checkpoint - The Ink Machine")]
 
     # Filler Items
     number_of_items = len(itempool)
