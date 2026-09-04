@@ -1,7 +1,6 @@
 from BaseClasses import Tutorial
 from worlds.AutoWorld import WebWorld
 
-# FIXME Add option_presets
 from .options import option_groups, option_presets
 
 
