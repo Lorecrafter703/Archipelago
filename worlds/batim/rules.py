@@ -26,7 +26,7 @@ def set_all_entrance_rules(world: BATIMWorld) -> None:
     menu_to_ch1_basement = world.get_entrance("Menu to CH1 Basement")
     ch1_intro_to_checkpoint = world.get_entrance("CH1 Intro to Checkpoint")
 
-    world.set_rule(menu_to_ch1_intro, Has("Unlock CH1"))
+    world.set_rule(menu_to_ch1_intro, Has("CH1 - Moving Pictures"))
     world.set_rule(menu_to_ch1_basement, Has("CH1 Checkpoint - Bendy Chase"))
     world.set_rule(ch1_intro_to_checkpoint, CAN_START_INK_MACHINE)
 
@@ -39,7 +39,7 @@ def set_all_entrance_rules(world: BATIMWorld) -> None:
         ch2_after_keys_to_after_valve = world.get_entrance("CH2 After Keys to After Valve")
         ch2_after_valve_to_after_keys = world.get_entrance("CH2 After Valve to After Keys")
 
-        world.set_rule(menu_to_ch2_intro, Has("Unlock CH2") | Has("CH2 Checkpoint - Lost Keys"))
+        world.set_rule(menu_to_ch2_intro, Has("CH2 - The Old Song") | Has("CH2 Checkpoint - Lost Keys"))
         world.set_rule(menu_to_ch2_after_valve, Has("CH2 Checkpoint - Sammy's Office"))
         world.set_rule(ch2_intro_to_after_keys, Has("Wally's Keys"))
         world.set_rule(ch2_after_keys_to_after_valve, Has("Sewer Valve"))
@@ -54,7 +54,7 @@ def set_all_entrance_rules(world: BATIMWorld) -> None:
         ch3_alice_objectives_to_after_cutouts = world.get_entrance("CH3 Alice Objectives to After Cutouts")
         ch3_after_cutouts_to_level_14 = world.get_entrance("CH3 After Cutouts to Level 14")
 
-        world.set_rule(menu_to_ch3_intro, Has("Unlock CH3"))
+        world.set_rule(menu_to_ch3_intro, Has("CH3 - Rise and Fall"))
         world.set_rule(menu_to_ch3_after_toys, Has("CH3 Checkpoint - Angel's Bidding"))
         world.set_rule(menu_to_ch3_alice_objectives, Has("CH3 Checkpoint - Butcher Gang"))
         world.set_rule(ch3_intro_to_after_toys, Has("Toy Machine"))
@@ -69,7 +69,7 @@ def set_all_entrance_rules(world: BATIMWorld) -> None:
         ch4_warehouse_to_after_bertrum = world.get_entrance("CH4 Warehouse to After Bertrum")
         ch4_after_bertrum_to_haunted_house = world.get_entrance("CH4 After Bertrum to Haunted House")
 
-        world.set_rule(menu_to_ch4_intro, Has("Unlock CH4"))
+        world.set_rule(menu_to_ch4_intro, Has("CH4 - Colossal Wonders"))
         world.set_rule(menu_to_ch4_warehouse, Has("CH4 Checkpoint - Warehouse"))
         world.set_rule(menu_to_ch4_haunted_house, Has("CH4 Checkpoint - Brute Boris"))
         world.set_rule(ch4_intro_to_after_book_puzzle, Has("Book Puzzle"))
@@ -82,7 +82,7 @@ def set_all_entrance_rules(world: BATIMWorld) -> None:
         ch5_intro_to_administration = world.get_entrance("CH5 Intro to Administration")
         ch5_administration_to_boss = world.get_entrance("CH5 Administration to Boss")
 
-        world.set_rule(menu_to_ch5_intro, Has("Unlock CH5"))
+        world.set_rule(menu_to_ch5_intro, Has("CH5 - The Last Reel"))
         world.set_rule(menu_to_ch5_administration, Has("CH5 Checkpoint - Administration"))
         ch5_boss_unlock_condition = Has("Bacon Soup", int(world.options.total_bacon_soups * (world.options.bacon_soups_required / 100)))
         world.set_rule(ch5_administration_to_boss, ch5_boss_unlock_condition)

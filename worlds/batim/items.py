@@ -14,7 +14,7 @@ ITEM_NAME_TO_ID = {
     "Empty Soup Can": 3,
     "Empty Ink Well": 4,
     "Broken Banjo String": 5,
-    "Unlock CH1": 100,
+    "CH1 - Moving Pictures": 100,
     "The Illusion of Living": 101,
     "Bendy Squeaky Toy": 102,
     "Spare Gear": 103,
@@ -22,24 +22,24 @@ ITEM_NAME_TO_ID = {
     "Vinyl Record": 105,
     "'Pocket' Wrench": 106,
     "CH1 Checkpoint - Bendy Chase": 107,
-    "Unlock CH2": 200,
+    "CH2 - The Old Song": 200,
     "Wally's Keys": 201,
     "Sewer Valve": 202,
     "CH2 Checkpoint - Lost Keys": 203,
     "CH2 Checkpoint - Sammy's Office": 204,
-    "Unlock CH3": 300,
+    "CH3 - Rise and Fall": 300,
     "Toy Machine": 301,
     "CH3 Checkpoint - Toy Machine": 302,
     "CH3 Checkpoint - Angel's Bidding": 303,
     "CH3 Checkpoint - Butcher Gang": 304,
     "Tommy Gun": 305,
     "Poor Dog's Bone": 306,
-    "Unlock CH4": 400,
+    "CH4 - Colossal Wonders": 400,
     "Book Puzzle": 401,
     "Bertrum Bossfight": 402,
     "CH4 Checkpoint - Warehouse": 403,
     "CH4 Checkpoint - Brute Boris": 404,
-    "Unlock CH5": 500,
+    "CH5 - The Last Reel": 500,
     "CH5 Checkpoint - Administration": 501,
     "CH5 Checkpoint - The Ink Machine": 502,
 }
@@ -56,11 +56,11 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "Toy Machine": ItemClassification.progression,
     "Book Puzzle": ItemClassification.progression,
     "Bertrum Bossfight": ItemClassification.progression,
-    "Unlock CH1": ItemClassification.progression,
-    "Unlock CH2": ItemClassification.progression,
-    "Unlock CH3": ItemClassification.progression,
-    "Unlock CH4": ItemClassification.progression,
-    "Unlock CH5": ItemClassification.progression,
+    "CH1 - Moving Pictures": ItemClassification.progression,
+    "CH2 - The Old Song": ItemClassification.progression,
+    "CH3 - Rise and Fall": ItemClassification.progression,
+    "CH4 - Colossal Wonders": ItemClassification.progression,
+    "CH5 - The Last Reel": ItemClassification.progression,
     "Bacon Soup": ItemClassification.progression,
     "CH1 Checkpoint - Bendy Chase": ItemClassification.useful,
     "CH2 Checkpoint - Lost Keys": ItemClassification.useful,
@@ -79,6 +79,14 @@ DEFAULT_ITEM_CLASSIFICATIONS = {
     "Broken Banjo String": ItemClassification.filler,
     "Trap": ItemClassification.trap,
 }
+
+CHAPTER_ID_TO_ITEM_NAME = [
+    "CH1 - Moving Pictures",
+    "CH2 - The Old Song",
+    "CH3 - Rise and Fall",
+    "CH4 - Colossal Wonders",
+    "CH5 - The Last Reel"
+]
 
 
 class BATIMItem(Item):
@@ -114,8 +122,8 @@ def create_all_items(world: BATIMWorld) -> None:
     # Chapter Unlocks
     for i in range (0, last_chapter + 1):
         if i != starting_chapter:
-            itempool += [world.create_item("Unlock CH" + str(i + 1))]
-    world.push_precollected(world.create_item("Unlock CH" + str(starting_chapter + 1)))
+            itempool += [world.create_item(CHAPTER_ID_TO_ITEM_NAME[i])]
+    world.push_precollected(world.create_item(CHAPTER_ID_TO_ITEM_NAME[starting_chapter]))
 
     # Chapter 1 Items
     itempool += [
