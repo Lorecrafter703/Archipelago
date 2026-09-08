@@ -9,7 +9,8 @@ from . import items
 if TYPE_CHECKING:
     from .world import BATIMWorld
 
-
+# Credit goes to @schwendyj on discord for naming the Bacon Soup checks and the Audio Log checks, as well as providing
+# the general check name format.
 LOCATION_NAME_TO_ID = {
     "CH1 Bacon Soup - Ritual Room": 100,
     "CH1 Bacon Soup - Projector Closet": 101,
@@ -148,6 +149,7 @@ LOCATION_NAME_TO_ID = {
     "CH3 Lever Challenge 2": 356,
     "CH3 Lever Challenge 3": 357,
     "CH3 Boris's Bone": 358,
+    "CH3 Toy Blockage": 359,
     "CH3 Complete": 399,
     "CH4 Bacon Soup - Unmarked Booth Counter": 400,
     "CH4 Bacon Soup - theMeatly’s Storage Room": 401,
@@ -361,6 +363,7 @@ def create_regular_locations(world: BATIMWorld) -> None:
             "CH3 Bacon Soup - Outside Boris’ Safehouse #2",
             "CH3 Bacon Soup - Outside Boris’ Safehouse #1",
             "CH3 Bacon Soup - Boris’ Bathroom Secret Soup",
+            "CH3 Toy Blockage",
         ])
         ch3_intro.add_locations(ch3_intro_locations, BATIMLocation)
 
