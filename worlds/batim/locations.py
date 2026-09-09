@@ -227,12 +227,12 @@ def create_regular_locations(world: BATIMWorld) -> None:
 
     ch1_intro = world.get_region("CH1 Intro")
     ch1_intro_locations = get_location_names_with_ids([
-        "CH1 Doll",
-        "CH1 Gear",
-        "CH1 Wrench",
-        "CH1 Record",
-        "CH1 Inkwell",
-        "CH1 Book",
+        "CH1 Ritual Item - Doll",
+        "CH1 Ritual Item - Gear",
+        "CH1 Ritual Item - Wrench",
+        "CH1 Ritual Item - Record",
+        "CH1 Ritual Item - Inkwell",
+        "CH1 Ritual Item - Book",
         "CH1 Bacon Soup - Projector Closet",
         "CH1 Bacon Soup - Music Room Top Shelf",
         "CH1 Bacon Soup - Music Room Bottom Shelf",
