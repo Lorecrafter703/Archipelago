@@ -148,7 +148,7 @@ LOCATION_NAME_TO_ID = {
     "CH3 Lever Challenge 1": 355,
     "CH3 Lever Challenge 2": 356,
     "CH3 Lever Challenge 3": 357,
-    "CH3 Boris's Bone": 358,
+    "CH3 Boris' Bone": 358,
     "CH3 Toy Blockage": 359,
     "CH3 Complete": 399,
     "CH4 Bacon Soup - Unmarked Booth Counter": 400,
@@ -448,7 +448,7 @@ def create_regular_locations(world: BATIMWorld) -> None:
             )
         if world.options.boris_bone:
             ch3_intro.add_locations(
-                get_location_names_with_ids(["CH3 Boris's Bone"]),
+                get_location_names_with_ids(["CH3 Boris' Bone"]),
                 BATIMLocation
             )
 
@@ -491,8 +491,8 @@ def create_regular_locations(world: BATIMWorld) -> None:
 
         ch4_after_bertrum = world.get_region("CH4 After Bertrum")
         ch4_after_bertrum_locations = get_location_names_with_ids([
-            "CH4 Bacon Soup - On the Barrel Upstairs (Maintenance Room)",
             "CH4 Bacon Soup - By the Little Miracle Station (Maintenance Room)",
+            "CH4 Bacon Soup - On the Barrel Upstairs (Maintenance Room)",
             "CH4 Boss - Bertrum",
             "CH4 Audio Log - Bertrum Piedmont (Attraction Storage)",
             "CH4 Audio Log - Joey Drew (Maintenance Room)",
