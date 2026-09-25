@@ -413,7 +413,6 @@ def create_regular_locations(world: BATIMWorld) -> None:
             "CH3 Audio Log - Wally Franks (Level 11)",
             "CH3 Audio Log - Grant Cohen (Accounting Office on Level 9)",
             "CH3 Radio",
-            "CH3 Tommy Gun Challenge",
         ])
         ch3_alice_objectives.add_locations(ch3_alice_objectives_locations, BATIMLocation)
 
@@ -421,9 +420,6 @@ def create_regular_locations(world: BATIMWorld) -> None:
         ch3_level_14_locations = get_location_names_with_ids([
             "CH3 Audio Log - Norman Polk (Projectionist’s Maze)",
             "CH3 Audio Log - Henry (Sunken Room)",
-            "CH3 Lever Challenge 1",
-            "CH3 Lever Challenge 2",
-            "CH3 Lever Challenge 3",
             "CH3 Complete",
         ])
         ch3_level_14.add_locations(ch3_level_14_locations, BATIMLocation)
@@ -449,6 +445,20 @@ def create_regular_locations(world: BATIMWorld) -> None:
         if world.options.boris_bone:
             ch3_intro.add_locations(
                 get_location_names_with_ids(["CH3 Boris' Bone"]),
+                BATIMLocation
+            )
+        if world.options.include_tommy_gun:
+            ch3_alice_objectives.add_locations(
+                get_location_names_with_ids(["CH3 Tommy Gun Challenge"]),
+                BATIMLocation
+            )
+        if world.options.include_lever_challenges:
+            ch3_level_14.add_locations(
+                get_location_names_with_ids([
+                    "CH3 Lever Challenge 1",
+                    "CH3 Lever Challenge 2",
+                    "CH3 Lever Challenge 3"
+                ]),
                 BATIMLocation
             )
 
